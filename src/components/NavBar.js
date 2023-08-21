@@ -17,6 +17,13 @@ import logo from "../assets/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import EmailIcon from "@mui/icons-material/Email";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const drawerWidth = 240;
 
@@ -51,7 +58,7 @@ const NavBar = (props) => {
 
   const buttonStyle = {
     height: "46px",
-    width: "104px",
+    width: "100%",
     fontFamily: "Interstate,Lucida Grande,Arial,sans-serif",
     fontWeight: 100,
     fontSize: "14px",
@@ -99,6 +106,17 @@ const NavBar = (props) => {
       },
     },
   }));
+
+  /***********menu button*********** */
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <AppBar component="nav" sx={{ background: "#333", boxShadow: "none" }}>
@@ -127,7 +145,7 @@ const NavBar = (props) => {
               <div style={{ display: "flex" }}>
                 <img src={logo} alt="logo" />
 
-                <Box>
+                <Box sx={{ display: "flex", width: 312 }}>
                   <Button sx={buttonStyle}>Home</Button>
                   <Button sx={buttonStyle}>Feed</Button>
                   <Button sx={buttonStyle}>Library</Button>
@@ -142,7 +160,11 @@ const NavBar = (props) => {
                 }}
               >
                 <Search
-                  sx={{ background: "#DDE6ED", height: "28px", width: "388px" }}
+                  sx={{
+                    background: "#DDE6ED",
+                    height: "28px",
+                    maxWidth: "388px",
+                  }}
                 >
                   <SearchIconWrapper>
                     <SearchIcon />
@@ -150,15 +172,93 @@ const NavBar = (props) => {
                   <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ "aria-label": "search" }}
-                    sx={{ height: "28px", width: "388px", color: "#3a4a4a" }}
+                    sx={{ height: "28px", maxWidth: "388px", color: "#3a4a4a" }}
                   />
                 </Search>
               </div>
+              <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: { sm: "none", md: "none", lg: "flex" } }}>
+                  <Button
+                    sx={buttonStyle}
+                    style={{ border: "unset", width: "100px" }}
+                  >
+                    Try Next Pro
+                  </Button>
+                  <Button
+                    sx={buttonStyle}
+                    style={{ border: "unset", width: "85px" }}
+                  >
+                    For Artists
+                  </Button>
+                  <Button
+                    sx={buttonStyle}
+                    style={{ border: "unset", width: "65px" }}
+                  >
+                    Upload
+                  </Button>
+                </Box>
+                <Box sx={{ display: "flex" }}>
+                  <div style={{ height: "100%" }}>
+                    <Button
+                      id="basic-button"
+                      aria-controls={open ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleClick}
+                      sx={{ height: "100%" }}
+                    >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="Remy Sharp"
+                        sx={{ width: 30, height: 30 }}
+                      />
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={handleClose}>My account</MenuItem>
+                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
+                  </div>
+
+                  <Tooltip title="No notifications" sx={{ width: 46 }}>
+                    <IconButton>
+                      <NotificationsIcon sx={{ color: "#ccc" }} />
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title="No messages" sx={{ width: 46 }}>
+                    <IconButton>
+                      <EmailIcon sx={{ color: "#ccc" }} />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+                <Box
+                  sx={{
+                    width: 46,
+                    height: 46,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <MoreHorizIcon
+                    sx={{ width: 35, height: 35, color: "#ccc" }}
+                  />
+                </Box>
+              </Box>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-
+      {/*****************mobile********************* */}
       <Box component="nav">
         <Drawer
           container={container}
