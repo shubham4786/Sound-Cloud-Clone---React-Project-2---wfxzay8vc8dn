@@ -14,9 +14,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
 import logo from "../assets/logo.png";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import { styled } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
@@ -69,44 +70,6 @@ const NavBar = (props) => {
     borderRadius: "unset",
   };
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-    color: "#85A389",
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#7C9070",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "388px",
-      },
-    },
-  }));
-
   /***********menu button*********** */
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -132,17 +95,14 @@ const NavBar = (props) => {
               <MenuIcon />
             </IconButton>
 
-            {/* <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
-              MUI
-            </Typography> */}
             <Box
-              sx={{ display: { xs: "none", sm: "flex" }, flexDirection: "row" }}
+              sx={{
+                width: "100%",
+                display: { xs: "none", sm: "flex" },
+                justifyContent: "space-between",
+              }}
             >
-              <div style={{ display: "flex" }}>
+              <Box sx={{ display: "flex" }}>
                 <img src={logo} alt="logo" />
 
                 <Box sx={{ display: "flex", width: 312 }}>
@@ -150,32 +110,37 @@ const NavBar = (props) => {
                   <Button sx={buttonStyle}>Feed</Button>
                   <Button sx={buttonStyle}>Library</Button>
                 </Box>
-              </div>
+              </Box>
 
-              <div
-                style={{
+              <Box
+                sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  width: "100%",
                 }}
               >
-                <Search
-                  sx={{
-                    background: "#DDE6ED",
-                    height: "28px",
-                    maxWidth: "388px",
-                  }}
+                <FormControl
+                  sx={{ ml: 2, mr: 2, width: "100%" }}
+                  variant="outlined"
                 >
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ "aria-label": "search" }}
-                    sx={{ height: "28px", maxWidth: "388px", color: "#3a4a4a" }}
+                  <OutlinedInput
+                    sx={{ background: "#e5e5e5" }}
+                    placeholder="Search"
+                    id="outlined-adornment-weight"
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <SearchIcon />
+                      </InputAdornment>
+                    }
+                    aria-describedby="outlined-weight-helper-text"
+                    inputProps={{
+                      "aria-label": "weight",
+                    }}
                   />
-                </Search>
-              </div>
+                </FormControl>
+              </Box>
+
               <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { sm: "none", md: "none", lg: "flex" } }}>
                   <Button

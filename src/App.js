@@ -1,8 +1,8 @@
-import NavBar from "./components/NavBar";
+import Layout from "./containers/Layout";
 function App() {
   return (
     <div>
-      <NavBar />
+      <Layout />
     </div>
   );
 }

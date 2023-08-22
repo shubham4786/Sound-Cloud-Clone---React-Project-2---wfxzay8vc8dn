@@ -1,4 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 /**********************NavBar**********************/
 .css-czr4cb-MuiToolbar-root {
     min-height: 46px !important;
 }
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 5px !important;
+    height: 20px !important;
+}
+
+
+
+/*******************temp**********************/
+.product--image {
+    width: 100%;
+    height: 16em;
+    object-fit: cover;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 320px;
+    margin: auto 1rem;
+    text-align: center;
+    font-family: arial;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
