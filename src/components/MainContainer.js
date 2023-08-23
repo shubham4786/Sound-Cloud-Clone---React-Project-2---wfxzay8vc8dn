@@ -12,7 +12,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
   boxShadow: "unset",
-  height: "100vh",
   margin: "1px",
 }));
 
