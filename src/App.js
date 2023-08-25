@@ -1,7 +1,9 @@
 import Layout from "./containers/Layout";
+import SignUp from "./containers/SignUp";
 function App() {
   return (
-    <div>
+    <div style={{ background: "#f2f2f2" }}>
+      {/* <SignUp /> */}
       <Layout />
     </div>
   );

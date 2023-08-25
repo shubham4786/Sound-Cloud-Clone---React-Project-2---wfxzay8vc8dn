@@ -1,7 +1,7 @@
 import React from "react";
 
 const AsideBox = () => {
-  return <div>AsideBox</div>;
+  return <div style={{ height: "100vh" }}>AsideBox</div>;
 };
 
 export default AsideBox;

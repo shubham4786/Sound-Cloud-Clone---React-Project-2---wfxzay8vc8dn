@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 
 const Layout = () => {
   return (
-    <div style={{ background: "#f2f2f2" }}>
+    <div>
       <NavBar />
       <Home />
     </div>
