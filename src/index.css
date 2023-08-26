@@ -12,3 +12,22 @@
     height: 20px !important;
 }
 
+
+/**********************SignIn*****************************/
+#name_error,
+#email_error,
+#pass_error {
+  margin: 0 20px 0px 20px;
+  color: #c62828;
+  display: none;
+  font-weight: 500;
+}
+
+#name,
+#email,
+#password{
+    font-size: 15px;
+    padding: 9px;
+    margin-top: 15px;
+
+}

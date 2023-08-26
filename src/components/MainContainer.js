@@ -25,7 +25,7 @@ const MainContainer = () => {
           </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item>
+          <Item sx={{ position: "fixed", width: "30%" }}>
             <AsideBox />
           </Item>
         </Grid>

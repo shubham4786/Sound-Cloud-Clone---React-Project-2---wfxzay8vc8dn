@@ -6,25 +6,28 @@ import logo from "../assets/signup_logo.png";
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import ChildModal from "../components/ChildModal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const SignUp = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 450,
     bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
   };
+
   const boxStyle = {
     background: "white",
     backgroundImage: `url(${imgSignup})`,
@@ -46,8 +49,28 @@ const SignUp = () => {
         light: "#f50",
         dark: "#f50",
       },
+      facebook: {
+        main: "#3578e5",
+        light: "#3578e5",
+        dark: "#3578e5",
+      },
+      apple: {
+        main: "#000",
+        light: "#000",
+        dark: "#000",
+      },
     },
   });
+
+  const modelBtnStyle = {
+    textTransform: "unset",
+    padding: "7px 8px",
+    marginBottom: "15px",
+    boxShadow: "unset",
+    fontFamily:
+      "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",
+    // fontSize: "16px",
+  };
 
   return (
     <>
@@ -120,22 +143,120 @@ const SignUp = () => {
               </Button>
             </Box>
           </Box>
+
+          <Modal open={open} sx={{ bgcolor: "#f2f2f2e6" }}>
+            <Box sx={style}>
+              <div style={{ display: "flex", justifyContent: "end" }}>
+                <CloseIcon onClick={handleClose} />
+              </div>
+              <Box sx={{ pt: 2, px: 3, pb: 3 }}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Button
+                    style={{
+                      ...modelBtnStyle,
+                      // background: "#3578e5",
+                      border: "1px solid #3578e5",
+                      color: "#fff",
+                    }}
+                    color="facebook"
+                    variant="contained"
+                  >
+                    Continue with Facebook
+                  </Button>
+                  <Button
+                    style={{
+                      ...modelBtnStyle,
+                      // background: "#fff",
+                      border: "1px solid #ccc",
+                      color: "#222",
+                    }}
+                    variant="contained"
+                  >
+                    Continue with Google
+                  </Button>
+                  <Button
+                    style={{
+                      ...modelBtnStyle,
+                      // background: "#000",
+                      border: "1px solid #000",
+                      color: "#fff",
+                    }}
+                    color="apple"
+                    variant="contained"
+                  >
+                    Continue with Apple
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <hr style={{ width: "45%" }} />{" "}
+                  <span style={{ margin: "0 10px", fontSize: "20px" }}>or</span>
+                  <hr style={{ width: "45%" }} />
+                </Box>
+
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    id="email"
+                    // onChange={handleLoginDetails}
+                    // ref={emailRef}
+                    // value={email}
+                    className="textField"
+                  />
+                  <div id="email_error" /*ref={emailErrorRef}*/>
+                    Please enter an email address
+                  </div>
+
+                  <input
+                    type="password"
+                    placeholder="Your Password"
+                    id="password"
+                    // onChange={handleLoginDetails}
+                    // ref={passwordRef}
+                    // value={password}
+                    className="textField"
+                  />
+                  <div id="pass_error" /*ref={passwordErrorRef}*/>
+                    Enter valid password
+                  </div>
+
+                  <Button
+                    style={{
+                      ...modelBtnStyle,
+                      color: "#fff",
+                      marginTop: "10px",
+                    }}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    Sign In
+                  </Button>
+                </Box>
+                <ChildModal />
+                <p
+                  style={{
+                    color: "#999",
+                    fontSize: "14px",
+                    textAlign: "justify",
+                    lineHeight: "1.4",
+                  }}
+                >
+                  When registering, you agree that we may use your provided data
+                  for the registration and to send you notifications on our
+                  products and services. You can unsubscribe from notifications
+                  at any time in your settings. For additional info please refer
+                  to our Privacy Policy.
+                </p>
+              </Box>
+            </Box>
+          </Modal>
         </ThemeProvider>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
       </Container>
     </>
   );
