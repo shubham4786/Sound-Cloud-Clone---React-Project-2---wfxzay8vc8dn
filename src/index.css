@@ -31,3 +31,8 @@
     margin-top: 15px;
 
 }
+
+/*****************BoxScroll*********************/
+.react-multi-carousel-track {
+    height: 250px;
+}

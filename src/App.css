@@ -1,0 +1,145 @@
+/****************audio_player**********************/
+.sound_cloud-app_audio_player{
+    position: fixed;
+    bottom: 0;
+    z-index: 2000;
+    width: 100%;
+    background-color: #f2f2f2;
+    border-top: 1px solid #9d9da6;
+}
+
+.sound_cloud-audio_player {
+    display: flex;
+    flex-direction: row;
+    height: 3rem;
+    width: 83%;
+    margin: 0 auto;
+  }
+
+  .sound_cloud-audio_player_left {
+    flex: 3.5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sound_cloud-audio_player button {
+    border: none;
+  }
+
+  .sound_cloud-audio_player_audio {
+    width: 90%;
+    color: red;
+    display: none;
+  }
+
+  .sound_cloud-audio_player_icons {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .sound_cloud-audio_player_time_progress {
+    flex: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sound_cloud-audio_player_cover {
+    width: 100%;
+    cursor: pointer;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 1rem;
+  }
+
+  .sound_cloud-audio_player_progress {
+    background-color: black;
+    height: 1px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .sound_cloud-audio_player_progress_fill {
+    background-color: orangered;
+    height: 2px;
+  }
+
+  .sound_cloud-audio_player_speaker {
+    flex: 0.8;
+    background-color: var(--color-player-bg);
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  .sound_cloud-audio_player_speaker_icon {
+    cursor: pointer;
+  }
+  .sound_cloud-audio_player_speaker_hover {
+    position: absolute;
+    bottom: 100%;
+    width: 2rem;
+    border: 1px solid var(--color-para-text);
+    height: 6rem;
+    left: 38%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+    display: none;
+  }
+
+  .sound_cloud-audio_player_speaker:hover
+  .sound_cloud-audio_player_speaker_hover {
+  display: flex;
+}
+
+
+.sound_cloud-audio_player_right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .sound_cloud-audio_player_right_images {
+    flex: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+ 
+  .sound_cloud-audio_player_right_images img {
+    max-height: 2rem;
+    max-width: auto;
+    border-radius: 0.25rem;
+  }
+  .sound_cloud-audio_player_right_images div {
+    padding: 0 0.5rem;
+    font-family: var(--font-a);
+  }
+  .sound_cloud-audio_player_right_images div p {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    max-width: 8rem;
+    overflow: hidden;
+    opacity: 0.8;
+  }
+  .sound_cloud-audio_player_right_images div p:nth-of-type(1):hover {
+    opacity: 1;
+  }
+  .sound_cloud-audio_player_right_images div p:nth-of-type(2):hover {
+    opacity: 1;
+  }
