@@ -32,9 +32,8 @@
   .sound_cloud-audio_player_audio {
     width: 90%;
     color: red;
-    display: none;
+    /* display: none; */
   }
-
   .sound_cloud-audio_player_icons {
     flex: 1;
     display: flex;
@@ -43,6 +42,7 @@
     align-items: center;
     padding: 0 1rem;
   }
+ 
 
   .sound_cloud-audio_player_time_progress {
     flex: 4;
@@ -104,6 +104,43 @@
   display: flex;
 }
 
+.sound_cloud-audio_player_rotate_spaker {
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  /* transform-origin; */
+  width: 5rem; /* Adjust the width as needed */
+  height: 2px;
+  color: orangered;
+}
+.sound_cloud-audio_player_rotate_spaker {
+  -webkit-appearance: none;
+  appearance: none;
+
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.sound_cloud-audio_player_rotate_spaker::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: orangered; /* Color of the slider thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sound_cloud-audio_player_rotate_spaker::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: orangered; /* Color of the slider thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 
 .sound_cloud-audio_player_right {
     flex: 1.5;
@@ -118,7 +155,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
  
   .sound_cloud-audio_player_right_images img {

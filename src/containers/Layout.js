@@ -1,16 +1,20 @@
 import React from "react";
-import Home from "./Home";
+// import Home from "./Home";
 import NavBar from "../components/NavBar";
-import PlayList from "./PlayList";
+// import PlayList from "./PlayList";
 import AudioPlayer from "../components/AudioPlayer";
 
-const Layout = () => {
+const Layout = (props) => {
+  const albumData = JSON.parse(localStorage.getItem("albumData"));
+  const songs = albumData.data.songs;
+  // console.log(songs);
+
+  const playlist = songs;
   return (
     <div>
       <NavBar />
-      <Home />
-      {/* <PlayList /> */}
-      <AudioPlayer />
+      {props.children}
+      <AudioPlayer playlist={playlist} />
     </div>
   );
 };
