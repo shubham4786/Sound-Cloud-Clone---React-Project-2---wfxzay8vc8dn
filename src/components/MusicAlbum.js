@@ -5,7 +5,7 @@ import { MyContext } from "../MyContext";
 
 const MusicAlbum = (props) => {
   // console.log(props.item);
-  const { setIsPlaying } = useContext(MyContext);
+  const { setIsPlaying, setSongList } = useContext(MyContext);
   const navigate = useNavigate();
 
   const albumData = (props) => {
@@ -15,6 +15,7 @@ const MusicAlbum = (props) => {
         data: props.item,
       })
     );
+    setSongList(JSON.parse(localStorage.getItem("albumData")));
     navigate("/playlist");
     setIsPlaying(true);
   };

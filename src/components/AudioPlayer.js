@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import "../App.css";
 import { ImNext2, ImPrevious2 } from "react-icons/im";
 import { FaPlay } from "react-icons/fa";
@@ -15,6 +15,8 @@ const AudioPlayer = ({ playlist }) => {
     isPlaying,
     setIsPlaying,
     audioRef,
+    playHistory,
+    setPlayHistory,
   } = useContext(MyContext);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -68,7 +70,7 @@ const AudioPlayer = ({ playlist }) => {
   };
 
   const selectedTrack = playlist[currentTrackIndex].audio_url;
-  // console.log(playlist[currentTrackIndex].audio_url);
+  // console.log(playlist[currentTrackIndex]);
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -89,6 +91,22 @@ const AudioPlayer = ({ playlist }) => {
     // setSongId(songs[currentSongIndex]._id);
     // setRepeat(false);
   };
+  useEffect(() => {
+    // console.log(playHistory);
+    localStorage.setItem(
+      "historySong",
+      JSON.stringify([
+        {
+          thumbnail: playlist[currentTrackIndex].thumbnail,
+          title: playlist[currentTrackIndex].title,
+          mood: playlist[currentTrackIndex].mood,
+        },
+        ...playHistory,
+      ])
+    );
+    setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
+  }, [currentTrackIndex]);
+  //
 
   return (
     <div className="sound_cloud-app_audio_player">

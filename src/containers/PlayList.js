@@ -10,12 +10,15 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 // import AudioPlayer from "../components/AudioPlayer";
 import { MyContext } from "../MyContext";
+import AsideBox from "../components/AsideBox";
 
 const PlayList = () => {
-  const albumData = JSON.parse(localStorage.getItem("albumData"));
-  const songs = albumData.data.songs;
+  const { setCurrentTrackIndex, setIsPlaying, songList } =
+    useContext(MyContext);
+  const albumData = songList.data;
+  const songs = albumData.songs;
 
-  const { setCurrentTrackIndex, setIsPlaying } = useContext(MyContext);
+  // console.log(albumData);
 
   const handleSong = (index) => {
     setCurrentTrackIndex(index);
@@ -42,13 +45,13 @@ const PlayList = () => {
           }}
         >
           <Box>
-            <h1>{albumData.data.title}</h1>
+            <h1>{albumData?.data?.title}</h1>
             <h2>SoundCloud</h2>
           </Box>
           <Box sx={{ background: " black", width: "25vw", height: "25vw" }}>
             <img
               style={{ width: "100%", height: "100%" }}
-              src={albumData.data.image}
+              src={albumData?.data?.image}
               alt=""
             />
           </Box>
@@ -59,7 +62,7 @@ const PlayList = () => {
               <Item>
                 <Box>
                   <List>
-                    {songs.map((song, index) => (
+                    {songs?.map((song, index) => (
                       <Box key={index}>
                         <ListItem button onClick={() => handleSong(index)}>
                           <Box sx={{ display: "flex" }}>
@@ -87,7 +90,9 @@ const PlayList = () => {
               </Item>
             </Grid>
             <Grid item xs={4}>
-              <Item>xs=4</Item>
+              <Item sx={{ height: "100%" }}>
+                <AsideBox />
+              </Item>
             </Grid>
           </Grid>
         </Box>

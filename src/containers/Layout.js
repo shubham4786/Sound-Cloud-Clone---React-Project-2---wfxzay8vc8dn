@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 // import Home from "./Home";
 import NavBar from "../components/NavBar";
 // import PlayList from "./PlayList";
 import AudioPlayer from "../components/AudioPlayer";
+import { MyContext } from "../MyContext";
 
 const Layout = (props) => {
-  const albumData = JSON.parse(localStorage.getItem("albumData"));
-  const songs = albumData.data.songs;
+  const { songList } = useContext(MyContext);
+  const albumData = songList.data;
+  const songs = albumData?.songs;
+  // const songs = "avd";
+
   // console.log(songs);
 
   const playlist = songs;
