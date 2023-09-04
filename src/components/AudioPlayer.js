@@ -201,10 +201,11 @@ const AudioPlayer = ({ playlist }) => {
             />
             <div>
               <p
-              // onClick={() => {
-              //   navigate("/song");
-              //   setActive("all");
-              // }}
+                // onClick={() => {
+                //   navigate("/song");
+                //   setActive("all");
+                // }}
+                style={{ textTransform: "capitalize" }}
               >
                 {playlist[currentTrackIndex]?.mood}
               </p>

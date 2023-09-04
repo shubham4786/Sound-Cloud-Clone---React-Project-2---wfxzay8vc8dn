@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import imgSignup from "../assets/signup.jpg";
@@ -9,9 +10,147 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Modal from "@mui/material/Modal";
 import ChildModal from "../components/ChildModal";
 import CloseIcon from "@mui/icons-material/Close";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [signin, setSignin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [signinStatus, setSigninStatus] = useState({
+    success: false,
+  });
+
+  const emailErrorRef = useRef(null);
+  const passwordErrorRef = useRef(null);
+
+  const { email, password } = signin;
+
+  const handleInput = (event) => {
+    const field = event.target.id;
+    const value = event.target.value;
+
+    setSignin({
+      ...signin,
+      [field]: value,
+    });
+
+    if (field === "email") {
+      emailErrorRef.current.style.display = "none";
+    } else if (field === "password") {
+      passwordErrorRef.current.style.display = "none";
+    }
+  };
+
+  const handleSignin = async (event) => {
+    event.preventDefault();
+
+    const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+    if (!email.match(emailPattern)) {
+      emailErrorRef.current.style.display = "block";
+    }
+    if (password.length < 5 || password.length > 60) {
+      passwordErrorRef.current.style.display = "block";
+    }
+    try {
+      const response = await axios.post(
+        "https://academics.newtonschool.co/api/v1/user/login",
+        {
+          email,
+          password,
+          appType: "music",
+        },
+        {
+          headers: {
+            projectId: "f104bi07c490",
+          },
+        }
+      );
+
+      const token = response.data.token;
+
+      const userName = response.data.data.name;
+      const userEmail = response.data.data.email;
+      const userPassword = response.data.data.password;
+      // const profileImage = response.data.data.profileImage;
+
+      const userDetails = {
+        userName: userName,
+        userEmail: userEmail,
+        userPassword: userPassword,
+      };
+      //Used to persist token
+      localStorage.setItem("authToken", token);
+
+      //Used to persist userinfo
+      localStorage.setItem("userInfo", JSON.stringify(userDetails));
+
+      //Used to persist Profile Image
+      // localStorage.setItem("updatedImage", profileImage);
+
+      setSigninStatus({
+        success: true,
+      });
+
+      toast.success("Signin Successfull.", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      console.error("Login Error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message === "User not found"
+      ) {
+        toast.error("User with this email is not registered.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        setSigninStatus({
+          success: false,
+        });
+        toast.error("Email or password is incorrect", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (signinStatus.success) {
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
+    }
+  }, [signinStatus]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -114,6 +253,7 @@ const SignUp = () => {
                 justifyContent: "center",
               }}
             >
+              <ToastContainer />
               <h2
                 style={{
                   fontWeight: 100,
@@ -149,8 +289,9 @@ const SignUp = () => {
               <div style={{ display: "flex", justifyContent: "end" }}>
                 <CloseIcon onClick={handleClose} />
               </div>
-              <Box sx={{ pt: 2, px: 3, pb: 3 }}>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <h1 style={{ textAlign: "center", padding: "5px" }}>Sign In</h1>
+              <Box sx={{ px: 3, pb: 3 }}>
+                {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
                   <Button
                     style={{
                       ...modelBtnStyle,
@@ -186,8 +327,8 @@ const SignUp = () => {
                   >
                     Continue with Apple
                   </Button>
-                </Box>
-                <Box
+                </Box> 
+                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -197,46 +338,52 @@ const SignUp = () => {
                   <hr style={{ width: "45%" }} />{" "}
                   <span style={{ margin: "0 10px", fontSize: "20px" }}>or</span>
                   <hr style={{ width: "45%" }} />
-                </Box>
+                </Box> */}
 
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    id="email"
-                    // onChange={handleLoginDetails}
-                    // ref={emailRef}
-                    // value={email}
-                    className="textField"
-                  />
-                  <div id="email_error" /*ref={emailErrorRef}*/>
-                    Please enter an email address
-                  </div>
-
-                  <input
-                    type="password"
-                    placeholder="Your Password"
-                    id="password"
-                    // onChange={handleLoginDetails}
-                    // ref={passwordRef}
-                    // value={password}
-                    className="textField"
-                  />
-                  <div id="pass_error" /*ref={passwordErrorRef}*/>
-                    Enter valid password
-                  </div>
-
-                  <Button
-                    style={{
-                      ...modelBtnStyle,
-                      color: "#fff",
-                      marginTop: "10px",
-                    }}
-                    color="secondary"
-                    variant="contained"
+                <Box>
+                  <form
+                    onSubmit={handleSignin}
+                    style={{ display: "flex", flexDirection: "column" }}
                   >
-                    Sign In
-                  </Button>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      id="email"
+                      onChange={handleInput}
+                      // ref={emailRef}
+                      value={email}
+                      className="textField"
+                    />
+                    <div id="email_error" ref={emailErrorRef}>
+                      Please enter an email address
+                    </div>
+
+                    <input
+                      type="password"
+                      placeholder="Your Password"
+                      id="password"
+                      onChange={handleInput}
+                      // ref={passwordRef}
+                      value={password}
+                      className="textField"
+                    />
+                    <div id="pass_error" ref={passwordErrorRef}>
+                      Enter valid password
+                    </div>
+
+                    <Button
+                      type="submit"
+                      style={{
+                        ...modelBtnStyle,
+                        color: "#fff",
+                        marginTop: "10px",
+                      }}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      Sign In
+                    </Button>
+                  </form>
                 </Box>
                 <ChildModal />
                 <p

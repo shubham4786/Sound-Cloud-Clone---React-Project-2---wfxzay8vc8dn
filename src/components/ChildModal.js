@@ -1,11 +1,145 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChildModal = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [signup, setSignup] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [signupStatus, setSignupStatus] = useState({
+    success: false,
+  });
+
+  const nameErrorRef = useRef(null);
+  const emailErrorRef = useRef(null);
+  const passwordErrorRef = useRef(null);
+
+  const handleInput = (event) => {
+    const field = event.target.id;
+    let value = event.target.value;
+
+    if (field === "email") {
+      value = value.toLowerCase();
+    }
+    // console.log(signup.email);
+
+    setSignup({
+      ...signup,
+      [field]: value,
+    });
+
+    if (field === "name") {
+      nameErrorRef.current.style.display = "none";
+    } else if (field === "email") {
+      emailErrorRef.current.style.display = "none";
+    } else if (field === "password") {
+      passwordErrorRef.current.style.display = "none";
+    }
+  };
+
+  const { name, email, password } = signup;
+
+  const handlesignup = async (event) => {
+    event.preventDefault();
+
+    const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+    if (name.length < 3) {
+      nameErrorRef.current.style.display = "block";
+    }
+    if (!email.match(emailPattern)) {
+      emailErrorRef.current.style.display = "block";
+    }
+    if (password.length < 5 || password.length > 60) {
+      passwordErrorRef.current.style.display = "block";
+    }
+    try {
+      // console.log("Sending signup request...");
+      const response = await axios.post(
+        "https://academics.newtonschool.co/api/v1/user/signup",
+        {
+          name: name,
+          email: email,
+          password: password,
+          appType: "music",
+        },
+        {
+          headers: {
+            projectId: "f104bi07c490",
+          },
+        }
+      );
+      // console.log("Signup successful:", response);
+
+      setSignupStatus({
+        success: true,
+      });
+      toast.success("Account successfully Registered!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      console.log("Signup Error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message === "User already exists"
+      ) {
+        setSignupStatus({
+          success: false,
+        });
+        toast.error("User with this email is already registered.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        setSignupStatus({
+          success: false,
+        });
+        toast.error("Error in signing up. Please try again.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (signupStatus.success) {
+      setTimeout(() => {
+        // navigate("/signin");
+        handleClose();
+      }, 3500);
+    }
+  }, [signupStatus]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,60 +185,68 @@ const ChildModal = () => {
       </Box>
       <Modal open={open}>
         <Box sx={style}>
+          {/* <ToastContainer /> */}
           <div style={{ display: "flex", justifyContent: "end" }}>
             <CloseIcon onClick={handleClose} />
           </div>
 
           <h1 style={{ textAlign: "center", padding: "10px" }}>Sign Up</h1>
           <Box sx={{ px: 3, pb: 2 }}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <input
-                type="text"
-                placeholder="Name"
-                id="name"
-                // onChange={handleSignupDetails}
-                // value={name}
-              />
-              <div id="name_error" /*ref={nameErrorRef}*/>
-                Enter your valid name
-              </div>
-
-              <input
-                type="email"
-                placeholder="Email"
-                id="email"
-                // onChange={handleSignupDetails}
-                // value={email}
-              />
-              <div id="email_error" /*ref={emailErrorRef}*/>
-                Enter valid email address
-              </div>
-
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                // onChange={handleSignupDetails}
-                // value={password}
-              />
-              <div id="pass_error" /*ref={passwordErrorRef}*/>
-                Password must contain atleast 6 characters
-              </div>
-
-              <Button
-                style={{
-                  ...modelBtnStyle,
-                  color: "#fff",
-                  marginTop: "15px",
-                }}
-                color="secondary"
-                variant="contained"
+            <Box>
+              <form
+                style={{ display: "flex", flexDirection: "column" }}
+                // onChange={handleInput}
+                onSubmit={handlesignup}
               >
-                Sign Up
-              </Button>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  id="name"
+                  onChange={handleInput}
+                  value={name}
+                />
+                <div id="name_error" ref={nameErrorRef}>
+                  Please enter a valid name.
+                </div>
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  id="email"
+                  onChange={handleInput}
+                  value={email}
+                />
+                <div id="email_error" ref={emailErrorRef}>
+                  Please enter a valid email address.
+                </div>
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  id="password"
+                  onChange={handleInput}
+                  value={password}
+                />
+                <div id="pass_error" ref={passwordErrorRef}>
+                  Password must contain atleast 6 characters
+                </div>
+
+                <Button
+                  type="submit"
+                  style={{
+                    ...modelBtnStyle,
+                    color: "#fff",
+                    marginTop: "15px",
+                  }}
+                  color="secondary"
+                  variant="contained"
+                >
+                  Sign Up
+                </Button>
+              </form>
             </Box>
 
-            <Box sx={{ textAlign: "center" }}>
+            <Box sx={{ textAlign: "center", paddingBottom: "10px" }}>
               <span>Already have an account?</span>
               <Button
                 style={{

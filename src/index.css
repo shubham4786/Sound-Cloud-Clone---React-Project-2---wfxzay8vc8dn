@@ -18,7 +18,7 @@
 #email_error,
 #pass_error {
   margin: 0 20px 0px 20px;
-  color: #c62828;
+  color: #ff0000;
   display: none;
   font-weight: 500;
 }
@@ -27,8 +27,8 @@
 #email,
 #password{
     font-size: 15px;
-    padding: 9px;
-    margin-top: 15px;
+    padding: 12px;
+    margin-top: 19px;
 
 }
 
