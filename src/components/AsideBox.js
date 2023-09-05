@@ -17,11 +17,7 @@ const AsideBox = () => {
         {playHistory.slice(0, 5).map((item, index) => (
           <div key={index} style={{ display: "flex", padding: "5px" }}>
             <div style={{ width: "50px", height: "50px" }}>
-              <img
-                style={{ width: "100%", height: "100%" }}
-                src={item?.thumbnail}
-                alt=""
-              />
+              <img style={{ width: "100%" }} src={item?.thumbnail} alt="" />
             </div>
             <div
               style={{

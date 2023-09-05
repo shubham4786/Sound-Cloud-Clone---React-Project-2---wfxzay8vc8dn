@@ -1,34 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BoxScroll from "./BoxScroll";
+import { fetchMusic } from "../apiCall/GetAlbum";
 
 const MainBox = () => {
   const [allAlbum, setAllAlbum] = useState([]);
 
-  const fetchMusic = async (page) => {
-    try {
-      const response = await axios.get(
-        `https://academics.newtonschool.co/api/v1/music/album`,
-        {
-          headers: {
-            projectId: "f104bi07c490",
-          },
-          params: {
-            page: page,
-            limit: 200,
-          },
-        }
-      );
-
-      return response.data.data;
-    } catch (error) {
-      console.error("Error fetching data from the API:", error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
-      const albumData = await fetchMusic(1);
+      const albumData = await fetchMusic(1, 200);
       setAllAlbum(albumData);
     };
     fetchData();

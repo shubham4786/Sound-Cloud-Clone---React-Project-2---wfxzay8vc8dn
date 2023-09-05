@@ -13,8 +13,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { fetchSongs, fetchfilterSongs } from "../apiCall/GetSongs";
+import { fetchMusic } from "../apiCall/GetAlbum";
 
 const SignUp = () => {
+  const [songSignUp, setSongSignUp] = useState([]);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const [signin, setSignin] = useState({
@@ -174,6 +177,7 @@ const SignUp = () => {
     backgroundSize: "100%",
     boxShadow: "inset 0 120px 40px -40px rgba(5,5,5,.5)",
     height: "450px",
+    borderTop: "4px solid #f50",
   };
 
   const theme = createTheme({
@@ -210,6 +214,15 @@ const SignUp = () => {
       "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",
     // fontSize: "16px",
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const songData = await fetchfilterSongs(3, 10);
+      setSongSignUp(songData);
+    };
+    fetchData();
+  }, []);
+  // console.log(songSignUp);
 
   return (
     <>
@@ -281,6 +294,102 @@ const SignUp = () => {
               >
                 Sign up for free
               </Button>
+            </Box>
+          </Box>
+          <Box sx={{ background: "white" }}>
+            <h1
+              style={{
+                fontSize: "24px",
+                textAlign: "center",
+                paddingTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              Hear what’s trending for free in the SoundCloud community
+            </h1>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+              }}
+            >
+              {songSignUp.map((item) => (
+                <Button
+                  key={item._id}
+                  // onClick={() => albumData(props)}
+                  onClick={handleOpen}
+                  sx={{
+                    width: 173,
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "10px",
+                  }}
+                >
+                  <div>
+                    <img
+                      style={{ width: 173, height: 173 }}
+                      src={item.thumbnail}
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h5 style={{ color: "#000" }}>{item.title}</h5>
+                  </div>
+                </Button>
+              ))}
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              background: "white",
+              height: "350px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h1 style={{ padding: "10px" }}>
+              Thanks for listening. Now join in.
+            </h1>
+            <h2 style={{ padding: "10px" }}>
+              Save tracks, follow artists and build playlists. All for free.
+            </h2>
+            <Button
+              onClick={handleOpen}
+              style={{ margin: "10px" }}
+              color="secondary"
+              variant="contained"
+            >
+              Create account
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              background: "white",
+              padding: "20px",
+              borderTop: "1px solid #f2f2f2",
+            }}
+          >
+            <Box sx={{ color: "#ccc", padding: "10px" }}>
+              <span style={{ padding: "5px" }}> About us </span>
+              <span style={{ padding: "5px" }}> Artist Resources</span>
+              <span style={{ padding: "5px" }}> Blog </span>
+              <span style={{ padding: "5px" }}>Jobs </span>
+              <span style={{ padding: "5px" }}> Developers </span>
+              <span style={{ padding: "5px" }}>Help </span>
+              <span style={{ padding: "5px" }}> Legal </span>
+              <span style={{ padding: "5px" }}> Privacy </span>
+              <span style={{ padding: "5px" }}> Cookie Policy </span>
+              <span style={{ padding: "5px" }}> Consent Manager </span>
+              <span style={{ padding: "5px" }}> Imprint </span>
+              <span style={{ padding: "5px" }}> Charts</span>
+            </Box>
+            <Box sx={{ padding: "10px " }}>
+              <span style={{ padding: "5px" }}>Language: English (US)</span>
             </Box>
           </Box>
 
