@@ -25,12 +25,14 @@ import Tooltip from "@mui/material/Tooltip";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -106,9 +108,30 @@ const NavBar = (props) => {
                 <img src={logo} alt="logo" />
 
                 <Box sx={{ display: "flex", width: 312 }}>
-                  <Button sx={buttonStyle}>Home</Button>
-                  <Button sx={buttonStyle}>Feed</Button>
-                  <Button sx={buttonStyle}>Library</Button>
+                  <Button
+                    onClick={() => {
+                      navigate("/home");
+                    }}
+                    sx={buttonStyle}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      navigate("/feed");
+                    }}
+                    sx={buttonStyle}
+                  >
+                    Feed
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      navigate("/library");
+                    }}
+                    sx={buttonStyle}
+                  >
+                    Library
+                  </Button>
                 </Box>
               </Box>
 

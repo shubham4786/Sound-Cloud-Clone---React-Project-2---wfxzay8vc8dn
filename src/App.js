@@ -4,6 +4,8 @@ import Home from "./containers/Home";
 import PlayList from "./containers/PlayList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyProvider from "./MyContext";
+import Feed from "./containers/Feed";
+import Library from "./containers/Library";
 
 function App() {
   return (
@@ -25,6 +27,22 @@ function App() {
               element={
                 <Layout>
                   <PlayList />
+                </Layout>
+              }
+            />
+            <Route
+              path="/feed"
+              element={
+                <Layout>
+                  <Feed />
+                </Layout>
+              }
+            />
+            <Route
+              path="/library"
+              element={
+                <Layout>
+                  <Library />
                 </Layout>
               }
             />

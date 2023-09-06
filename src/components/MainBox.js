@@ -9,6 +9,7 @@ const MainBox = () => {
   useEffect(() => {
     const fetchData = async () => {
       const albumData = await fetchMusic(1, 200);
+      // console.log(albumData);
       setAllAlbum(albumData);
     };
     fetchData();

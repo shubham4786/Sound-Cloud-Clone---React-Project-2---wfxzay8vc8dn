@@ -9,6 +9,7 @@ import { BsVolumeUp } from "react-icons/bs";
 import { MyContext } from "../MyContext";
 
 const AudioPlayer = ({ playlist }) => {
+  // console.log(playlist);
   const {
     currentTrackIndex,
     setCurrentTrackIndex,
@@ -105,8 +106,23 @@ const AudioPlayer = ({ playlist }) => {
       ])
     );
     setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
-  }, [currentTrackIndex]);
+  }, [isPlaying, currentTrackIndex]);
+
   //
+  // if (isPlaying) {
+  //   localStorage.setItem(
+  //     "historySong",
+  //     JSON.stringify([
+  //       {
+  //         thumbnail: playlist[currentTrackIndex].thumbnail,
+  //         title: playlist[currentTrackIndex].title,
+  //         mood: playlist[currentTrackIndex].mood,
+  //       },
+  //       ...playHistory,
+  //     ])
+  //   );
+  //   setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
+  // }
 
   return (
     <div className="sound_cloud-app_audio_player">

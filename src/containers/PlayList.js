@@ -11,6 +11,7 @@ import Divider from "@mui/material/Divider";
 // import AudioPlayer from "../components/AudioPlayer";
 import { MyContext } from "../MyContext";
 import AsideBox from "../components/AsideBox";
+import SongListBox from "../components/SongListBox";
 
 const PlayList = () => {
   const { setCurrentTrackIndex, setIsPlaying, songList } =
@@ -18,7 +19,7 @@ const PlayList = () => {
   const albumData = songList.data;
   const songs = albumData.songs;
 
-  // console.log(albumData);
+  console.log(albumData);
 
   const handleSong = (index) => {
     setCurrentTrackIndex(index);
@@ -45,13 +46,13 @@ const PlayList = () => {
           }}
         >
           <Box>
-            <h1>{albumData?.data?.title}</h1>
+            <h1>{albumData?.title}</h1>
             <h2>SoundCloud</h2>
           </Box>
           <Box sx={{ background: " black", width: "25vw", height: "25vw" }}>
             <img
               style={{ width: "100%", height: "100%" }}
-              src={albumData?.data?.image}
+              src={albumData?.image}
               alt=""
             />
           </Box>
@@ -63,27 +64,33 @@ const PlayList = () => {
                 <Box>
                   <List>
                     {songs?.map((song, index) => (
-                      <Box key={index}>
-                        <ListItem button onClick={() => handleSong(index)}>
-                          <Box sx={{ display: "flex" }}>
-                            <Box
-                              sx={{
-                                background: " black",
-                                width: "10vw",
-                                height: "10vw",
-                              }}
-                            >
-                              <img
-                                style={{ width: "100%", height: "100%" }}
-                                src={song.thumbnail}
-                                alt=""
-                              />
-                            </Box>
-                            <span>{song.title}</span>
-                          </Box>
-                        </ListItem>
-                        <Divider light />
-                      </Box>
+                      <SongListBox
+                        key={index}
+                        song={song}
+                        index={index}
+                        onClick={handleSong}
+                      />
+                      // <Box key={index}>
+                      //   <ListItem button onClick={() => handleSong(index)}>
+                      //     <Box sx={{ display: "flex" }}>
+                      //       <Box
+                      //         sx={{
+                      //           background: " black",
+                      //           width: "10vw",
+                      //           height: "10vw",
+                      //         }}
+                      //       >
+                      //         <img
+                      //           style={{ width: "100%", height: "100%" }}
+                      //           src={song.thumbnail}
+                      //           alt=""
+                      //         />
+                      //       </Box>
+                      //       <span>{song.title}</span>
+                      //     </Box>
+                      //   </ListItem>
+                      //   <Divider light />
+                      // </Box>
                     ))}
                   </List>
                 </Box>
