@@ -7,6 +7,7 @@ import { GiPauseButton } from "react-icons/gi";
 import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
 import { BsVolumeUp } from "react-icons/bs";
 import { MyContext } from "../MyContext";
+import { useNavigate } from "react-router-dom";
 
 const AudioPlayer = ({ playlist }) => {
   // console.log(playlist);
@@ -26,6 +27,7 @@ const AudioPlayer = ({ playlist }) => {
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(1);
   const clickRef = useRef();
+  const navigate = useNavigate();
 
   const playPauseToggle = () => {
     if (isPlaying) {
@@ -51,11 +53,13 @@ const AudioPlayer = ({ playlist }) => {
     setPlayed(0);
   };
 
-  const handleTimeUpdate = () => {
+  const handleTimeUpdate = (event) => {
+    const currentTime = event.target.currentTime;
+    const duration = event.target.duration;
     if (audioRef.current) {
       setCurrentTime(audioRef.current.currentTime);
     }
-    setPlayed(0);
+    setPlayed(currentTime / duration);
   };
 
   const handleVolumeChange = (event) => {
@@ -70,8 +74,10 @@ const AudioPlayer = ({ playlist }) => {
     playNextTrack();
   };
 
-  const selectedTrack = playlist[currentTrackIndex].audio_url;
   // console.log(playlist[currentTrackIndex]);
+  // console.log(currentTrackIndex);
+
+  const selectedTrack = playlist[currentTrackIndex].audio_url;
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -94,35 +100,36 @@ const AudioPlayer = ({ playlist }) => {
   };
   useEffect(() => {
     // console.log(playHistory);
-    localStorage.setItem(
-      "historySong",
-      JSON.stringify([
-        {
-          thumbnail: playlist[currentTrackIndex].thumbnail,
-          title: playlist[currentTrackIndex].title,
-          mood: playlist[currentTrackIndex].mood,
-        },
-        ...playHistory,
-      ])
-    );
-    setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
-  }, [isPlaying, currentTrackIndex]);
+    const data = JSON.parse(localStorage.getItem("historySong"));
+    if (playlist[currentTrackIndex].thumbnail) {
+      if (data) {
+        localStorage.setItem(
+          "historySong",
+          JSON.stringify([
+            {
+              thumbnail: playlist[currentTrackIndex].thumbnail,
+              title: playlist[currentTrackIndex].title,
+              mood: playlist[currentTrackIndex].mood,
+            },
 
-  //
-  // if (isPlaying) {
-  //   localStorage.setItem(
-  //     "historySong",
-  //     JSON.stringify([
-  //       {
-  //         thumbnail: playlist[currentTrackIndex].thumbnail,
-  //         title: playlist[currentTrackIndex].title,
-  //         mood: playlist[currentTrackIndex].mood,
-  //       },
-  //       ...playHistory,
-  //     ])
-  //   );
-  //   setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
-  // }
+            ...data,
+          ])
+        );
+      } else {
+        localStorage.setItem(
+          "historySong",
+          JSON.stringify([
+            {
+              thumbnail: playlist[currentTrackIndex].thumbnail,
+              title: playlist[currentTrackIndex].title,
+              mood: playlist[currentTrackIndex].mood,
+            },
+          ])
+        );
+      }
+    }
+    setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
+  }, [currentTrackIndex]);
 
   return (
     <div className="sound_cloud-app_audio_player">

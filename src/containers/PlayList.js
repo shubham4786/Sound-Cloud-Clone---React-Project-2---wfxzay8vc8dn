@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -14,17 +14,26 @@ import AsideBox from "../components/AsideBox";
 import SongListBox from "../components/SongListBox";
 
 const PlayList = () => {
-  const { setCurrentTrackIndex, setIsPlaying, songList } =
-    useContext(MyContext);
+  const {
+    setCurrentTrackIndex,
+    currentTrackIndex,
+    setIsPlaying,
+    songList,
+    setSongList,
+  } = useContext(MyContext);
   const albumData = songList.data;
   const songs = albumData.songs;
 
-  console.log(albumData);
+  // console.log(albumData);
 
   const handleSong = (index) => {
     setCurrentTrackIndex(index);
     setIsPlaying(true);
   };
+
+  useEffect(() => {
+    setSongList(JSON.parse(localStorage.getItem("albumData")));
+  }, []);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -45,9 +54,12 @@ const PlayList = () => {
               "linear-gradient(135deg, rgb(187, 190, 188) 0%, rgb(112, 134, 137) 100%)",
           }}
         >
-          <Box>
+          <Box sx={{ margin: "20px 70px" }}>
             <h1>{albumData?.title}</h1>
             <h2>SoundCloud</h2>
+            <p style={{ textTransform: "capitalize" }}>
+              {albumData?.description}
+            </p>
           </Box>
           <Box sx={{ background: " black", width: "25vw", height: "25vw" }}>
             <img
@@ -70,27 +82,6 @@ const PlayList = () => {
                         index={index}
                         onClick={handleSong}
                       />
-                      // <Box key={index}>
-                      //   <ListItem button onClick={() => handleSong(index)}>
-                      //     <Box sx={{ display: "flex" }}>
-                      //       <Box
-                      //         sx={{
-                      //           background: " black",
-                      //           width: "10vw",
-                      //           height: "10vw",
-                      //         }}
-                      //       >
-                      //         <img
-                      //           style={{ width: "100%", height: "100%" }}
-                      //           src={song.thumbnail}
-                      //           alt=""
-                      //         />
-                      //       </Box>
-                      //       <span>{song.title}</span>
-                      //     </Box>
-                      //   </ListItem>
-                      //   <Divider light />
-                      // </Box>
                     ))}
                   </List>
                 </Box>

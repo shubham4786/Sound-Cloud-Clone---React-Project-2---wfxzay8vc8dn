@@ -8,9 +8,14 @@ const MainBox = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const albumData = await fetchMusic(1, 200);
+      const albumData = await fetchMusic(1, 120);
       // console.log(albumData);
-      setAllAlbum(albumData);
+      const newAlbumData = albumData.filter((item) => {
+        // console.log(item.songs.length);
+        return item.songs.length > 1;
+      });
+      // console.log(newAlbumData);
+      setAllAlbum(newAlbumData);
     };
     fetchData();
   }, []);
@@ -18,32 +23,32 @@ const MainBox = () => {
   return (
     <div style={{ marginBottom: "30px" }}>
       <BoxScroll
-        allAlbum={allAlbum.slice(0, 20)}
+        allAlbum={allAlbum.slice(0, 12)}
         titleText="Charts: Top 20"
         description="The most played tracks on SoundCloud this week"
       />
       <BoxScroll
-        allAlbum={allAlbum.slice(20, 40)}
+        allAlbum={allAlbum.slice(12, 24)}
         titleText="Charts: New & hot"
         description="Up-and-coming tracks on SoundCloud"
       />
       <BoxScroll
-        allAlbum={allAlbum.slice(40, 60)}
+        allAlbum={allAlbum.slice(24, 36)}
         titleText="Artists You Should Know"
         description="Top tracks from artists similar to Prigya Queen"
       />
 
       <BoxScroll
-        allAlbum={allAlbum.slice(60, 80)}
+        allAlbum={allAlbum.slice(36, 48)}
         titleText="Chill"
         description=""
       />
       <BoxScroll
-        allAlbum={allAlbum.slice(80, 100)}
+        allAlbum={allAlbum.slice(48, 60)}
         titleText="For fans of YT MUSIC"
         description=""
       />
-      <BoxScroll
+      {/* <BoxScroll
         allAlbum={allAlbum.slice(100, 120)}
         titleText="Workout"
         description=""
@@ -68,7 +73,7 @@ const MainBox = () => {
         allAlbum={allAlbum.slice(180, 200)}
         titleText="At Home"
         description=""
-      />
+      /> */}
     </div>
   );
 };

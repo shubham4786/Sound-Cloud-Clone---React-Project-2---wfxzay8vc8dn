@@ -15,8 +15,13 @@ import SongListBox from "../components/SongListBox";
 import AudioPlayer from "../components/AudioPlayer";
 
 const Feed = () => {
-  const { setCurrentTrackIndex, setIsPlaying, setSongList, songList } =
-    useContext(MyContext);
+  const {
+    setCurrentTrackIndex,
+    setIsPlaying,
+    setSongList,
+    songList,
+    setPlayHistory,
+  } = useContext(MyContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -30,17 +35,6 @@ const Feed = () => {
       const songData = await fetchSongs(page, 5);
 
       const data = songData;
-      // const songs = JSON.parse(localStorage.getItem("albumData")).data.songs;
-      // console.log(songs);
-      // localStorage.setItem(
-      //   "albumData",
-      //   JSON.stringify({
-      //     data: {
-      //       songs: songs.concat(data),
-      //     },
-      //   })
-      // );
-      // setSongList(JSON.parse(localStorage.getItem("albumData")));
 
       setItems((prevItems) => [...prevItems, ...data]);
       setPage((prevPage) => prevPage + 1);
@@ -50,19 +44,6 @@ const Feed = () => {
       setIsLoading(false);
     }
   };
-
-  // const songs = items;
-  // console.log(songs);
-
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     "albumData",
-  //     JSON.stringify({
-  //       data: { songs },
-  //     })
-  //   );
-  //   setSongList(JSON.parse(localStorage.getItem("albumData")));
-  // }, [items]);
 
   useEffect(() => {
     fetchData();
@@ -78,6 +59,7 @@ const Feed = () => {
       );
     }
     // setSongList(JSON.parse(localStorage.getItem("albumData")));
+    // setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
   }, [items]);
 
   const handleScroll = () => {

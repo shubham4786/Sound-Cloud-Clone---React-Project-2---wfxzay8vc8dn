@@ -1,20 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MyContext } from "../MyContext";
 
 const AsideBox = () => {
-  const { playHistory } = useContext(MyContext);
+  const { playHistory, setPlayHistory } = useContext(MyContext);
   const fotStyle = {
     padding: "2px",
     fontSize: "12px",
     fontWeight: 600,
   };
+
+  // useEffect(() => {
+  //   setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
+  // }, []);
   return (
     <div style={{ height: "100vh", padding: "10px 25px" }}>
       <div style={{ padding: "10px 0" }}>
         <div style={{ fontSize: "initial", fontWeight: "600" }}>
           <span>Listening history</span>
         </div>
-        {playHistory.slice(0, 5).map((item, index) => (
+        {playHistory?.slice(0, 5).map((item, index) => (
           <div key={index} style={{ display: "flex", padding: "5px" }}>
             <div style={{ width: "50px", height: "50px" }}>
               <img style={{ width: "100%" }} src={item?.thumbnail} alt="" />
@@ -28,8 +32,8 @@ const AsideBox = () => {
                 fontWeight: "600",
               }}
             >
-              <span style={{ textTransform: "capitalize" }}>{item?.mood}</span>
               <span>{item?.title}</span>
+              <span style={{ textTransform: "capitalize" }}>{item?.mood}</span>
             </div>
           </div>
         ))}

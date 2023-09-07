@@ -38,7 +38,9 @@ const MusicAlbum = (props) => {
         />
       </div>
       <div>
-        <h5>{props.item.title}</h5>
+        <h5 style={{ textTransform: "capitalize", color: "#5e5e5e" }}>
+          {props.item.title}
+        </h5>
       </div>
     </Button>
   );

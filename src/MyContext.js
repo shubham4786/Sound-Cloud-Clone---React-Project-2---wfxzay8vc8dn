@@ -11,6 +11,8 @@ const MyProvider = ({ children }) => {
   // console.log(data);
   const [songList, setSongList] = useState(albumData);
   const [feedSong, setFeedSong] = useState([]);
+  const [isLike, setIsLike] = useState(false);
+
   return (
     <MyContext.Provider
       value={{
@@ -25,6 +27,8 @@ const MyProvider = ({ children }) => {
         setSongList,
         feedSong,
         setFeedSong,
+        isLike,
+        setIsLike,
       }}
     >
       {children}
