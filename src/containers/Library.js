@@ -4,16 +4,14 @@ import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import { MyContext } from "../MyContext";
 import { fetchMyList } from "../apiCall/GetLike";
 import SongListBox from "../components/SongListBox";
-import Button from "@mui/material/Button";
+import workImgae from "../assets/working.png";
 
 const Library = () => {
   const [value, setValue] = useState(0);
-  const { playHistory, setPlayHistory, isLike, setIsLike } =
-    useContext(MyContext);
+  const { playHistory, isLike } = useContext(MyContext);
   const [myList, setMyList] = useState([]);
 
   useEffect(() => {
@@ -72,16 +70,6 @@ const Library = () => {
     minHeight: "80vh",
   };
 
-  const buttonStyle = () => ({
-    color: "#211f1f",
-    display: "flex",
-    textTransform: "none",
-    lineHeight: 1,
-    fontSize: "0.8rem",
-    padding: "10px",
-    flexWrap: "wrap",
-    marginTop: "14px",
-  });
   return (
     <Container maxWidth="xl" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
       <Box sx={{ margin: "0 24px" }}>
@@ -105,55 +93,17 @@ const Library = () => {
               </Tabs>
             </Box>
             <CustomTabPanel style={tabPanel} value={value} index={0}>
-              {myList?.map((song, index) => (
-                // <SongListBox
-                //   key={index}
-                //   song={song}
-                //   index={index}
-                //   // onClick={handleSong}
-                // />
-                <Box sx={{ display: "flex", paddingLeft: "20px" }}>
-                  <Box
-                    // onClick={() => onClick(index)}
-                    sx={{
-                      background: " black",
-                      width: "10vw",
-                      height: "10vw",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <img
-                      style={{ width: "100%", height: "100%" }}
-                      src={song.thumbnail}
-                      alt=""
-                    />
-                  </Box>
-                  <Box sx={{ padding: "15px 40px " }}>
-                    <Box
-                      // onClick={() => onClick(index)}
-                      sx={{
-                        cursor: "pointer",
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      <h2>{song.title}</h2>
-                      <h5>{song.mood}</h5>
-                    </Box>
-                    <Button
-                      sx={
-                        buttonStyle
-                      } /*onClick={() => handleLikeBtn(song._id)}*/
-                    >
-                      {/* <span> {likesCount} </span> */}
-
-                      {/* <ThumbUpAltIcon sx={{ padding: "0 5px", color: likeColor }} /> */}
-                      {/* <span style={{ color: likeColor, fontWeight: "600" }}>
-                        Like
-                      </span> */}
-                    </Button>
-                  </Box>
-                </Box>
-              ))}
+              <Box>
+                {myList?.map((song, index) => (
+                  <SongListBox
+                    key={index}
+                    song={song}
+                    index={index}
+                    text="Remove"
+                    // onClick={handleSong}
+                  />
+                ))}
+              </Box>
             </CustomTabPanel>
             <CustomTabPanel style={tabPanel} value={value} index={1}>
               <Box
@@ -189,7 +139,9 @@ const Library = () => {
               </Box>
             </CustomTabPanel>
             <CustomTabPanel style={tabPanel} value={value} index={2}>
-              Item Two
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <img style={{ width: "100vh" }} src={workImgae} alt="" />
+              </Box>
             </CustomTabPanel>
           </Box>
 

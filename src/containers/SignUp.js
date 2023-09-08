@@ -93,6 +93,7 @@ const SignUp = () => {
 
       //Used to persist userinfo
       localStorage.setItem("userInfo", JSON.stringify(userDetails));
+      localStorage.removeItem("historySong");
 
       //Used to persist Profile Image
       // localStorage.setItem("updatedImage", profileImage);
@@ -234,12 +235,17 @@ const SignUp = () => {
                 padding: "20px",
                 display: "flex",
                 justifyContent: "space-between",
+                flexWrap: "wrap",
               }}
             >
               <Box>
                 <img style={{ width: "150px" }} src={logo} alt="" />
               </Box>
-              <Stack spacing={2} direction="row">
+              <Stack
+                sx={{ display: "flex", flexWrap: "wrap" }}
+                spacing={2}
+                direction="row"
+              >
                 <Button onClick={handleOpen} variant="outlined">
                   Sign in
                 </Button>
@@ -250,7 +256,9 @@ const SignUp = () => {
                 >
                   Create account
                 </Button>
-                <Button variant="text">For Artists</Button>
+                {/* <Button sx={{ cursor: "unset" }} variant="text">
+                  For Artists
+                </Button> */}
               </Stack>
             </Box>
             <Box
@@ -259,6 +267,7 @@ const SignUp = () => {
                 fontFamily:
                   "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",
                 fontWeight: 100,
+                // display: "flex",
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",

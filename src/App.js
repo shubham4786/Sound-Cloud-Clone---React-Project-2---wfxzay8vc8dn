@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyProvider from "./MyContext";
 import Feed from "./containers/Feed";
 import Library from "./containers/Library";
+import Working from "./containers/Working";
+import Profile from "./containers/Profile";
 
 function App() {
   return (
@@ -43,6 +45,22 @@ function App() {
               element={
                 <Layout>
                   <Library />
+                </Layout>
+              }
+            />
+            <Route
+              path="/working"
+              element={
+                <Layout>
+                  <Working />
+                </Layout>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Layout>
+                  <Profile />
                 </Layout>
               }
             />

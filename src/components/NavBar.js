@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -33,6 +33,11 @@ const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -82,6 +87,16 @@ const NavBar = (props) => {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => {
+    navigate("/profile");
+    handleClose();
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userInfo");
+    navigate("/");
+  };
   return (
     <>
       <AppBar component="nav" sx={{ background: "#333", boxShadow: "none" }}>
@@ -105,7 +120,14 @@ const NavBar = (props) => {
               }}
             >
               <Box sx={{ display: "flex" }}>
-                <img src={logo} alt="logo" />
+                <img
+                  onClick={() => {
+                    navigate("/home");
+                  }}
+                  src={logo}
+                  alt="logo"
+                  style={{ cursor: "pointer" }}
+                />
 
                 <Box sx={{ display: "flex", width: 312 }}>
                   <Button
@@ -167,18 +189,27 @@ const NavBar = (props) => {
               <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { sm: "none", md: "none", lg: "flex" } }}>
                   <Button
+                    onClick={() => {
+                      navigate("/working");
+                    }}
                     sx={buttonStyle}
                     style={{ border: "unset", width: "100px" }}
                   >
                     Try Next Pro
                   </Button>
                   <Button
+                    onClick={() => {
+                      navigate("/working");
+                    }}
                     sx={buttonStyle}
                     style={{ border: "unset", width: "85px" }}
                   >
                     For Artists
                   </Button>
                   <Button
+                    onClick={() => {
+                      navigate("/working");
+                    }}
                     sx={buttonStyle}
                     style={{ border: "unset", width: "65px" }}
                   >
@@ -196,8 +227,8 @@ const NavBar = (props) => {
                       sx={{ height: "100%" }}
                     >
                       <Avatar
-                        alt="Remy Sharp"
-                        src="Remy Sharp"
+                        alt={user.userName}
+                        src={user.userName}
                         sx={{ width: 30, height: 30 }}
                       />
                     </Button>
@@ -210,19 +241,25 @@ const NavBar = (props) => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={handleProfile}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={handleSignOut}>Logout</MenuItem>
                     </Menu>
                   </div>
 
-                  <Tooltip title="No notifications" sx={{ width: 46 }}>
+                  <Tooltip
+                    title="No notifications"
+                    sx={{ width: 46, cursor: "unset" }}
+                  >
                     <IconButton>
                       <NotificationsIcon sx={{ color: "#ccc" }} />
                     </IconButton>
                   </Tooltip>
 
-                  <Tooltip title="No messages" sx={{ width: 46 }}>
+                  <Tooltip
+                    title="No messages"
+                    sx={{ width: 46, cursor: "unset" }}
+                  >
                     <IconButton>
                       <EmailIcon sx={{ color: "#ccc" }} />
                     </IconButton>
