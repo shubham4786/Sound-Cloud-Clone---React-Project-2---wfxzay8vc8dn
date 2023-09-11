@@ -20,6 +20,7 @@ const PlayList = () => {
     setIsPlaying,
     songList,
     setSongList,
+    searchedHideRef,
   } = useContext(MyContext);
   const albumData = songList.data;
   const songs = albumData.songs;
@@ -43,7 +44,11 @@ const PlayList = () => {
     color: theme.palette.text.secondary,
   }));
   return (
-    <Container maxWidth="xl" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
+    <Container
+      maxWidth="xl"
+      ref={searchedHideRef}
+      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+    >
       <Box sx={{ margin: "0 24px" }}>
         <Box
           sx={{

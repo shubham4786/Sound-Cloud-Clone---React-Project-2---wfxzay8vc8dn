@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -26,15 +26,85 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import EmailIcon from "@mui/icons-material/Email";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import SongListBox from "./SongListBox";
+import { MyContext } from "../MyContext";
 
 const drawerWidth = 240;
 
 const NavBar = (props) => {
+  const {
+    setCurrentTrackIndex,
+    setIsPlaying,
+    setSongList,
+    songList,
+    setPlayHistory,
+    searchedHideRef,
+  } = useContext(MyContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
-
   const [user, setUser] = useState({});
+  const [searchInput, setSearchInput] = useState("");
+  const [searchedSongs, setSearchedSongs] = useState([]);
+
+  // const { setSearching } = useContext(SearchContext);
+  const searchContainerRef = useRef(null);
+  const searchSongsRef = useRef([]);
+
+  const fetchSeachSongs = async () => {
+    try {
+      const response = await axios.get(
+        "https://academics.newtonschool.co/api/v1/music/song",
+        {
+          headers: {
+            projectId: "f104bi07c490",
+          },
+        }
+      );
+      searchSongsRef.current = response.data.data;
+      // console.log("setting", searchSongsRef.current);
+      // console.log("searchSongs", searchSongsRef.current);
+      const searchResult = searchSongsRef.current.filter((song) =>
+        song.title.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      setSearchedSongs(searchResult);
+      // console.log(searchResult);
+      // console.log("response", response.data.data);
+    } catch (error) {
+      console.error("Error fetching data from search:", error);
+    }
+  };
+
+  const inputValueHandler = (event) => {
+    setSearchInput(event.target.value);
+    // console.log("search value:", event.target.value);
+    if (event.target.value) {
+      fetchSeachSongs();
+      searchContainerRef.current.style.display = "block";
+      searchedHideRef.current.style.display = "none";
+      //   // setSearching(false);
+    } else {
+      searchContainerRef.current.style.display = "none";
+      searchedHideRef.current.style.display = "block";
+      searchSongsRef.current = [];
+      //   // setSearching(true);
+    }
+  };
+
+  const handleSong = (index) => {
+    // console.log(JSON.parse(localStorage.getItem("albumData")));
+    const newData = {
+      data: {
+        songs: searchedSongs,
+      },
+    };
+    // console.log(newData);
+    setSongList(newData);
+    setCurrentTrackIndex(index);
+    setIsPlaying(true);
+  };
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
@@ -170,6 +240,8 @@ const NavBar = (props) => {
                   variant="outlined"
                 >
                   <OutlinedInput
+                    value={searchInput}
+                    onChange={inputValueHandler}
                     sx={{ background: "#e5e5e5" }}
                     placeholder="Search"
                     id="outlined-adornment-weight"
@@ -283,6 +355,27 @@ const NavBar = (props) => {
           </Toolbar>
         </Container>
       </AppBar>
+      <Container maxWidth="lg">
+        <Box sx={{ margin: "0 24px" }}>
+          <Box sx={{ background: "white" }}>
+            <div
+              className="searchSuggestionsContainer"
+              ref={searchContainerRef}
+            >
+              <div style={{ overflowX: "hidden" }}>
+                {searchedSongs.map((song, index) => (
+                  <SongListBox
+                    key={index}
+                    song={song}
+                    index={index}
+                    onClick={handleSong}
+                  />
+                ))}
+              </div>
+            </div>
+          </Box>
+        </Box>
+      </Container>
       {/*****************mobile********************* */}
       <Box component="nav">
         <Drawer

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import workImgae from "../assets/working.png";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import { MyContext } from "../MyContext";
 
 const Working = () => {
+  const { searchedHideRef } = useContext(MyContext);
   return (
-    <Container maxWidth="xl" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
+    <Container
+      maxWidth="xl"
+      ref={searchedHideRef}
+      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+    >
       <Box sx={{ margin: "0 24px" }}>
         <Box
           sx={{

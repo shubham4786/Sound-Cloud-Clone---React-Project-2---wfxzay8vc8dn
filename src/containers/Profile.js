@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import { MyContext } from "../MyContext";
 
 const Profile = () => {
+  const { searchedHideRef } = useContext(MyContext);
   const [user, setUser] = useState({});
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
   //   console.log(user);
   return (
-    <Container maxWidth="lg" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
+    <Container
+      maxWidth="lg"
+      ref={searchedHideRef}
+      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+    >
       <Box sx={{ margin: "0 24px" }}>
         <Box sx={{ background: "white" }}>
           <Box sx={{}}>

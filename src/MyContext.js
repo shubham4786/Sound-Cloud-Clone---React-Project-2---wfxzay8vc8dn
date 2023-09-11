@@ -12,6 +12,7 @@ const MyProvider = ({ children }) => {
   const [songList, setSongList] = useState(albumData);
   const [feedSong, setFeedSong] = useState([]);
   const [isLike, setIsLike] = useState(false);
+  const searchedHideRef = useRef(null);
 
   return (
     <MyContext.Provider
@@ -29,6 +30,7 @@ const MyProvider = ({ children }) => {
         setFeedSong,
         isLike,
         setIsLike,
+        searchedHideRef,
       }}
     >
       {children}

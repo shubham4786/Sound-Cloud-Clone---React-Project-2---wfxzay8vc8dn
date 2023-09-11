@@ -21,6 +21,7 @@ const Feed = () => {
     setSongList,
     songList,
     setPlayHistory,
+    searchedHideRef,
   } = useContext(MyContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +94,11 @@ const Feed = () => {
     color: theme.palette.text.secondary,
   }));
   return (
-    <Container maxWidth="xl" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
+    <Container
+      maxWidth="xl"
+      ref={searchedHideRef}
+      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+    >
       <Box sx={{ margin: "0 24px" }}>
         <Box sx={{ background: "white" }}>
           <h1

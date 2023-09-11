@@ -10,6 +10,14 @@ import SongListBox from "../components/SongListBox";
 import workImgae from "../assets/working.png";
 
 const Library = () => {
+  const {
+    setCurrentTrackIndex,
+    setIsPlaying,
+    setSongList,
+    songList,
+    setPlayHistory,
+    searchedHideRef,
+  } = useContext(MyContext);
   const [value, setValue] = useState(0);
   const { playHistory, isLike } = useContext(MyContext);
   const [myList, setMyList] = useState([]);
@@ -22,6 +30,29 @@ const Library = () => {
     };
     fetchData();
   }, [isLike]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const favorites = await fetchMyList();
+      // console.log(favorites);
+      localStorage.setItem(
+        "albumData",
+        JSON.stringify({
+          data: {
+            songs: favorites,
+          },
+        })
+      );
+    };
+    fetchData();
+  }, []);
+
+  const handleSong = (index) => {
+    // console.log(index);
+    setSongList(JSON.parse(localStorage.getItem("albumData")));
+    setCurrentTrackIndex(index);
+    setIsPlaying(true);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,7 +102,11 @@ const Library = () => {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ paddingTop: "45px", marginBottom: "50px" }}>
+    <Container
+      maxWidth="xl"
+      ref={searchedHideRef}
+      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+    >
       <Box sx={{ margin: "0 24px" }}>
         <Box sx={{ background: "white" }}>
           <Box sx={{ width: "100%" }}>
@@ -100,7 +135,7 @@ const Library = () => {
                     song={song}
                     index={index}
                     text="Remove"
-                    // onClick={handleSong}
+                    onClick={handleSong}
                   />
                 ))}
               </Box>

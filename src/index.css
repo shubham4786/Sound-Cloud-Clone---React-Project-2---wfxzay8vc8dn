@@ -13,6 +13,13 @@
     height: 20px !important;
 }
 
+.searchSuggestionsContainer{
+    display: none;
+    overflow-x: hidden;
+    min-height: 100vh;
+    padding-top: 50px;
+}
+
 
 /**********************SignIn*****************************/
 #name_error,
