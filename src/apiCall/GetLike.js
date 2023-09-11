@@ -8,7 +8,7 @@ export const fetchMyList = async () => {
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
-          projectId: "f104bi07c490",
+          projectId: "wfxzay8vc8dn",
         },
       }
     );

@@ -44,3 +44,107 @@
 .react-multi-carousel-track {
     height: 250px;
 }
+
+
+/**********************Profile************************/
+.inputAccount {
+    width: 95%;
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #737373;
+    font-size: 16px;
+}
+
+
+.inputAccount:focus {
+    outline: 2px solid #057dff;
+    border: none;
+}
+
+.forgotPassword {
+    color: #057dff;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
+}
+
+.inputCheckboxAccount {
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.accountpasswordError {
+    color: #fd0602;
+    font-size: 13px;
+    margin-top: 5px;
+    display: none;
+}
+
+.updatePasswordInput {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.accountBtns {
+    display: flex;
+    gap: 10px;
+}
+
+.saveAccountBtn {
+    padding: 12px 35px;
+    background-color: #057dff;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 50%;
+}
+
+.cancelAccountBtn {
+    padding: 12px 35px;
+    background-color: #b3b3b3;
+    color: #333;
+    font-weight: 600;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 50%;
+}
+
+.saveAccountBtn:hover {
+    background-color: #1b83f3;
+}
+
+.cancelAccountBtn:hover {
+    background-color: #c7c7c7;
+}
+
+.css-19ktlgi {
+    display: flex;
+    align-items: center;
+}
+
+.changeText {
+    font-size: 14px;
+}
+
+.changeHeading {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+}

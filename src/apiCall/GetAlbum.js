@@ -6,7 +6,7 @@ export const fetchMusic = async (page, limit) => {
       `https://academics.newtonschool.co/api/v1/music/album`,
       {
         headers: {
-          projectId: "f104bi07c490",
+          projectId: "wfxzay8vc8dn",
         },
         params: {
           page: page,

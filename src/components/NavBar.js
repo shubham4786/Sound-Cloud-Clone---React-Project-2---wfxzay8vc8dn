@@ -33,14 +33,8 @@ import { MyContext } from "../MyContext";
 const drawerWidth = 240;
 
 const NavBar = (props) => {
-  const {
-    setCurrentTrackIndex,
-    setIsPlaying,
-    setSongList,
-    songList,
-    setPlayHistory,
-    searchedHideRef,
-  } = useContext(MyContext);
+  const { setCurrentTrackIndex, setIsPlaying, setSongList, searchedHideRef } =
+    useContext(MyContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
@@ -58,7 +52,7 @@ const NavBar = (props) => {
         "https://academics.newtonschool.co/api/v1/music/song",
         {
           headers: {
-            projectId: "f104bi07c490",
+            projectId: "wfxzay8vc8dn",
           },
         }
       );

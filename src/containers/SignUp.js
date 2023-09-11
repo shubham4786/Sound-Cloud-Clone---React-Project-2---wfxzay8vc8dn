@@ -13,8 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { fetchSongs, fetchfilterSongs } from "../apiCall/GetSongs";
-import { fetchMusic } from "../apiCall/GetAlbum";
+import { fetchfilterSongs } from "../apiCall/GetSongs";
 
 const SignUp = () => {
   const [songSignUp, setSongSignUp] = useState([]);
@@ -71,7 +70,7 @@ const SignUp = () => {
         },
         {
           headers: {
-            projectId: "f104bi07c490",
+            projectId: "wfxzay8vc8dn",
           },
         }
       );
