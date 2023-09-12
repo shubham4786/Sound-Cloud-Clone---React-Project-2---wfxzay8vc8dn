@@ -261,7 +261,7 @@ const NavBar = (props) => {
                   }}
                   src={logo}
                   alt="logo"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", height: "46px" }}
                 />
 
                 <Box sx={{ display: "flex", width: 312 }}>
@@ -307,7 +307,7 @@ const NavBar = (props) => {
                   <OutlinedInput
                     value={searchInput}
                     onChange={inputValueHandler}
-                    sx={{ background: "#e5e5e5" }}
+                    sx={{ background: "#e5e5e5", height: "30px" }}
                     placeholder="Search"
                     id="outlined-adornment-weight"
                     endAdornment={
