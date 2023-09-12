@@ -11,12 +11,12 @@ export const responsive = {
     slidesToSlide: 3,
   },
   tablet: {
-    breakpoint: { max: 950, min: 464 },
+    breakpoint: { max: 800, min: 464 },
     items: 2,
     slidesToSlide: 2,
   },
   mobile: {
-    breakpoint: { max: 685, min: 0 },
+    breakpoint: { max: 500, min: 0 },
     items: 1,
     slidesToSlide: 1,
   },

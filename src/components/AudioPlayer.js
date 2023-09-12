@@ -3,11 +3,10 @@ import "../App.css";
 import { ImNext2, ImPrevious2 } from "react-icons/im";
 import { FaPlay } from "react-icons/fa";
 import { GiPauseButton } from "react-icons/gi";
-
 import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
 import { BsVolumeUp } from "react-icons/bs";
 import { MyContext } from "../MyContext";
-import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const AudioPlayer = ({ playlist }) => {
   // console.log(playlist);
@@ -17,7 +16,6 @@ const AudioPlayer = ({ playlist }) => {
     isPlaying,
     setIsPlaying,
     audioRef,
-    playHistory,
     setPlayHistory,
   } = useContext(MyContext);
 
@@ -27,7 +25,6 @@ const AudioPlayer = ({ playlist }) => {
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(1);
   const clickRef = useRef();
-  const navigate = useNavigate();
 
   const playPauseToggle = () => {
     if (isPlaying) {
@@ -215,7 +212,10 @@ const AudioPlayer = ({ playlist }) => {
             </div>
           </button>
         </div>
-        <div className="sound_cloud-audio_player_right">
+        <Box
+          sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
+          className="sound_cloud-audio_player_right"
+        >
           <div className="sound_cloud-audio_player_right_images">
             <img
               src={playlist[currentTrackIndex]?.thumbnail}
@@ -239,7 +239,7 @@ const AudioPlayer = ({ playlist }) => {
               </p>
             </div>
           </div>
-        </div>
+        </Box>
       </div>
     </div>
   );

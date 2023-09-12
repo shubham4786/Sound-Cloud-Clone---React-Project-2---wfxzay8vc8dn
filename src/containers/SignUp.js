@@ -80,7 +80,6 @@ const SignUp = () => {
       const userName = response.data.data.name;
       const userEmail = response.data.data.email;
       const userPassword = response.data.data.password;
-      // const profileImage = response.data.data.profileImage;
 
       const userDetails = {
         userName: userName,
@@ -93,9 +92,6 @@ const SignUp = () => {
       //Used to persist userinfo
       localStorage.setItem("userInfo", JSON.stringify(userDetails));
       localStorage.removeItem("historySong");
-
-      //Used to persist Profile Image
-      // localStorage.setItem("updatedImage", profileImage);
 
       setSigninStatus({
         success: true,
@@ -166,7 +162,7 @@ const SignUp = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 450,
+    width: { xs: "90%", sm: "70%", md: "45%", lg: "38%" },
     bgcolor: "background.paper",
   };
 
@@ -266,11 +262,11 @@ const SignUp = () => {
                 fontFamily:
                   "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",
                 fontWeight: 100,
-                // display: "flex",
                 display: "flex",
+                // display: "none",
                 alignItems: "center",
                 flexDirection: "column",
-                height: "354px",
+                // height: "354px",
                 justifyContent: "center",
               }}
             >
@@ -278,7 +274,7 @@ const SignUp = () => {
               <h2
                 style={{
                   fontWeight: 100,
-                  color: "#fff",
+                  color: "#b59797",
                   fontSize: "33px",
                 }}
               >
@@ -286,7 +282,7 @@ const SignUp = () => {
               </h2>
               <p
                 style={{
-                  color: "#fff",
+                  color: "#b59797",
                   maxWidth: "530px",
                   margin: "10px",
                 }}

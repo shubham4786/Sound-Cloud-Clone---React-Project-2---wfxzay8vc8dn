@@ -108,26 +108,25 @@ export const albumData = {
       "A vibrant tapestry of sounds, representing the myriad colors of India's musical heritage.",
     songs: [
       {
-        // featured: null,
-        // _id: "64cf90c547ae38c3e33a1e51",
-        // title: "Zihaal e Miskin",
-        // artist: [
-        //   "64ce7c0bbbbada037c35edc9",
-        //   "64ce7c0bbbbada037c35ee23",
-        //   "64ce7c0bbbbada037c35ee24",
-        // ],
-        // album: "64cee72fe41f6d0a8b0cd0bd",
-        // likedBy: [],
-        // dateOfRelease: "2023-05-25T00:00:00.000Z",
-        // type: "song",
-        // mood: "happy",
-        // thumbnail:
-        //   "https://newton-project-resume-backend.s3.amazonaws.com/thumbnail/64cf90c547ae38c3e33a1e51.jpg",
-        // appType: "music",
-        // createdAt: "2023-08-06T12:23:33.434Z",
-        // __v: 0,
-        // audio_url:
-        //   "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf90c547ae38c3e33a1e51.mp3",
+        featured: null,
+        _id: "64cf90c547ae38c3e33a1e51",
+        title: "Zihaal e Miskin",
+        artist: [
+          "64ce7c0bbbbada037c35edc9",
+          "64ce7c0bbbbada037c35ee23",
+          "64ce7c0bbbbada037c35ee24",
+        ],
+        album: "64cee72fe41f6d0a8b0cd0bd",
+        likedBy: [],
+        dateOfRelease: "2023-05-25T00:00:00.000Z",
+        type: "song",
+        mood: "happy",
+        thumbnail:
+          "https://newton-project-resume-backend.s3.amazonaws.com/thumbnail/64cf90c547ae38c3e33a1e51.jpg",
+        appType: "music",
+        createdAt: "2023-08-06T12:23:33.434Z",
+        __v: 0,
+        // audio_url:"https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf90c547ae38c3e33a1e51.mp3",
       },
     ],
     image:

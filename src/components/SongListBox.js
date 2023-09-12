@@ -27,13 +27,13 @@ const SongListBox = ({ song, index, onClick, text = "Add To Favorite" }) => {
   return (
     <Box key={index}>
       <ListItem>
-        <Box sx={{ display: "flex", paddingLeft: "20px" }}>
+        <Box sx={{ display: "flex", paddingLeft: "20px", flexWrap: "wrap" }}>
           <Box
             onClick={() => onClick(index)}
             sx={{
               background: " black",
-              width: "10vw",
-              height: "10vw",
+              width: "150px",
+              height: "150px",
               cursor: "pointer",
             }}
           >
@@ -43,7 +43,7 @@ const SongListBox = ({ song, index, onClick, text = "Add To Favorite" }) => {
               alt=""
             />
           </Box>
-          <Box sx={{ padding: "15px 40px " }}>
+          <Box sx={{ padding: "15px " }}>
             <Box
               onClick={() => onClick(index)}
               sx={{

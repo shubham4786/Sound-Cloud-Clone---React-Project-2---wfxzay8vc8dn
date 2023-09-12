@@ -2,27 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import Container from "@mui/material/Container";
 import { MyContext } from "../MyContext";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import List from "@mui/material/List";
-// import ListItemText from "@mui/material/ListItemText";
-
 import AsideBox from "../components/AsideBox";
 import { fetchSongs } from "../apiCall/GetSongs";
 import SongListBox from "../components/SongListBox";
-import AudioPlayer from "../components/AudioPlayer";
 
 const Feed = () => {
-  const {
-    setCurrentTrackIndex,
-    setIsPlaying,
-    setSongList,
-    songList,
-    setPlayHistory,
-    searchedHideRef,
-  } = useContext(MyContext);
+  const { setCurrentTrackIndex, setIsPlaying, setSongList, searchedHideRef } =
+    useContext(MyContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -114,7 +104,7 @@ const Feed = () => {
           </h1>
           <Box>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={12} sm={12} md={8} lg={8}>
                 <Item>
                   <Box>
                     <List>

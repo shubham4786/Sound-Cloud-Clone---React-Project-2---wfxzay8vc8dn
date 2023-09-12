@@ -10,14 +10,8 @@ import SongListBox from "../components/SongListBox";
 import workImgae from "../assets/working.png";
 
 const Library = () => {
-  const {
-    setCurrentTrackIndex,
-    setIsPlaying,
-    setSongList,
-    songList,
-    setPlayHistory,
-    searchedHideRef,
-  } = useContext(MyContext);
+  const { setCurrentTrackIndex, setIsPlaying, setSongList, searchedHideRef } =
+    useContext(MyContext);
   const [value, setValue] = useState(0);
   const { playHistory, isLike } = useContext(MyContext);
   const [myList, setMyList] = useState([]);

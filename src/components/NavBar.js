@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
@@ -11,7 +10,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
 import logo from "../assets/logo.png";
 import FormControl from "@mui/material/FormControl";
@@ -106,28 +104,6 @@ const NavBar = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
-        {/* {navItems.map((item) => ( */}
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText>home</ListItemText>
-          </ListItemButton>
-        </ListItem>
-        {/* ))} */}
-      </List>
-    </Box>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   const buttonStyle = {
     height: "46px",
     width: "100%",
@@ -141,16 +117,6 @@ const NavBar = (props) => {
     borderRadius: "unset",
   };
 
-  /***********menu button*********** */
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleProfile = () => {
     navigate("/profile");
     handleClose();
@@ -161,6 +127,111 @@ const NavBar = (props) => {
     localStorage.removeItem("userInfo");
     navigate("/");
   };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
+        MUI
+      </Typography> */}
+      <img
+        onClick={() => {
+          navigate("/home");
+        }}
+        src={logo}
+        alt="logo"
+        style={{ cursor: "pointer" }}
+      />
+      <Divider />
+      <List>
+        {/* {navItems.map((item) => ( */}
+        <ListItem disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <Box>
+              <Button
+                onClick={() => {
+                  navigate("/home");
+                }}
+                sx={{
+                  ...buttonStyle,
+                  margin: "5px 5px",
+                  color: "#564e4e",
+                  fontWeight: "600",
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/feed");
+                }}
+                sx={{
+                  ...buttonStyle,
+                  margin: "5px 5px",
+                  color: "#564e4e",
+                  fontWeight: "600",
+                }}
+              >
+                Feed
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/library");
+                }}
+                sx={{
+                  ...buttonStyle,
+                  margin: "5px 5px",
+                  color: "#564e4e",
+                  fontWeight: "600",
+                }}
+              >
+                Library
+              </Button>
+              <Button
+                onClick={handleProfile}
+                sx={{
+                  ...buttonStyle,
+                  margin: "5px 5px",
+                  color: "#564e4e",
+                  fontWeight: "600",
+                }}
+              >
+                Profile
+              </Button>
+              <Button
+                onClick={handleSignOut}
+                sx={{
+                  ...buttonStyle,
+                  margin: "5px 5px",
+                  color: "#564e4e",
+                  fontWeight: "600",
+                }}
+              >
+                Logout
+              </Button>
+            </Box>
+            {/* <Box>
+              <ListItemText>home</ListItemText>
+            </Box> */}
+          </ListItemButton>
+        </ListItem>
+        {/* ))} */}
+      </List>
+    </Box>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  /***********menu button*********** */
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <AppBar component="nav" sx={{ background: "#333", boxShadow: "none" }}>
@@ -308,14 +379,18 @@ const NavBar = (props) => {
                       }}
                     >
                       <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem>
+                      {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                       <MenuItem onClick={handleSignOut}>Logout</MenuItem>
                     </Menu>
                   </div>
 
                   <Tooltip
                     title="No notifications"
-                    sx={{ width: 46, cursor: "unset" }}
+                    sx={{
+                      width: 46,
+                      cursor: "unset",
+                      display: { sm: "none", md: "flex" },
+                    }}
                   >
                     <IconButton>
                       <NotificationsIcon sx={{ color: "#ccc" }} />
@@ -324,7 +399,11 @@ const NavBar = (props) => {
 
                   <Tooltip
                     title="No messages"
-                    sx={{ width: 46, cursor: "unset" }}
+                    sx={{
+                      width: 46,
+                      cursor: "unset",
+                      display: { sm: "none", md: "flex" },
+                    }}
                   >
                     <IconButton>
                       <EmailIcon sx={{ color: "#ccc" }} />
@@ -335,7 +414,7 @@ const NavBar = (props) => {
                   sx={{
                     width: 46,
                     height: 46,
-                    display: "flex",
+                    display: { sm: "none", md: "flex" },
                     justifyContent: "center",
                     alignItems: "center",
                   }}
@@ -346,9 +425,40 @@ const NavBar = (props) => {
                 </Box>
               </Box>
             </Box>
+            <Box
+              sx={{
+                display: { xs: "flex", sm: "none" },
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <FormControl
+                sx={{ ml: 2, mr: 2, width: "100%" }}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  value={searchInput}
+                  onChange={inputValueHandler}
+                  sx={{ background: "#e5e5e5" }}
+                  placeholder="Search"
+                  id="outlined-adornment-weight"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <SearchIcon />
+                    </InputAdornment>
+                  }
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
+              </FormControl>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
+      {/****************** Search Reasult*********************/}
       <Container maxWidth="lg">
         <Box sx={{ margin: "0 24px" }}>
           <Box sx={{ background: "white" }}>

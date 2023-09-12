@@ -152,8 +152,9 @@ const ChildModal = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 450,
+    // maxWidth: "500px",
     bgcolor: "background.paper",
+    width: { xs: "90%", sm: "70%", md: "45%", lg: "38%" },
   };
 
   const modelBtnStyle = {
@@ -164,6 +165,9 @@ const ChildModal = () => {
     fontFamily:
       "Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif",
     // fontSize: "16px",
+  };
+  const handleSingUp = () => {
+    handleOpen();
   };
 
   return (
@@ -178,7 +182,7 @@ const ChildModal = () => {
             fontWeight: "600",
             padding: " 0 8px",
           }}
-          onClick={handleOpen}
+          onClick={handleSingUp}
         >
           Sign Up
         </Button>

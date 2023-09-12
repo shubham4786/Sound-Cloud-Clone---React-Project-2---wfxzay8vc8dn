@@ -19,12 +19,12 @@ const MainContainer = () => {
   return (
     <Box sx={{ flexGrow: 1, margin: "0 24px" }}>
       <Grid container>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={12} md={8} lg={8}>
           <Item>
             <MainBox />
           </Item>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Item sx={{ position: "fixed", width: "30%" }}>
             <AsideBox />
           </Item>
