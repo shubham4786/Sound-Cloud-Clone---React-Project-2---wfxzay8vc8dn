@@ -440,7 +440,7 @@ const NavBar = (props) => {
                 <OutlinedInput
                   value={searchInput}
                   onChange={inputValueHandler}
-                  sx={{ background: "#e5e5e5" }}
+                  sx={{ background: "#e5e5e5", height: "30px" }}
                   placeholder="Search"
                   id="outlined-adornment-weight"
                   endAdornment={
