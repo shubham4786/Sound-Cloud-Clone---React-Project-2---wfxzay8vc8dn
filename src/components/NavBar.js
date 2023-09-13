@@ -254,77 +254,79 @@ const NavBar = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              <Box sx={{ display: "flex" }}>
-                <img
-                  onClick={() => {
-                    navigate("/home");
-                  }}
-                  src={logo}
-                  alt="logo"
-                  style={{ cursor: "pointer", height: "46px" }}
-                />
-
-                <Box sx={{ display: "flex", width: 312 }}>
-                  <Button
+              <Box sx={{ display: "flex", width: "75%" }}>
+                <Box sx={{ display: "flex" }}>
+                  <img
                     onClick={() => {
                       navigate("/home");
                     }}
-                    sx={buttonStyle}
+                    src={logo}
+                    alt="logo"
+                    style={{ cursor: "pointer", height: "46px" }}
+                  />
+
+                  <Box sx={{ display: "flex", width: 312 }}>
+                    <Button
+                      onClick={() => {
+                        navigate("/home");
+                      }}
+                      sx={buttonStyle}
+                    >
+                      Home
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        navigate("/feed");
+                      }}
+                      sx={buttonStyle}
+                    >
+                      Feed
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        navigate("/library");
+                      }}
+                      sx={buttonStyle}
+                    >
+                      Library
+                    </Button>
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  <FormControl
+                    sx={{ ml: 2, mr: 2, width: "100%" }}
+                    variant="outlined"
                   >
-                    Home
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      navigate("/feed");
-                    }}
-                    sx={buttonStyle}
-                  >
-                    Feed
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      navigate("/library");
-                    }}
-                    sx={buttonStyle}
-                  >
-                    Library
-                  </Button>
+                    <OutlinedInput
+                      value={searchInput}
+                      onChange={inputValueHandler}
+                      sx={{ background: "#e5e5e5", height: "30px" }}
+                      placeholder="Search"
+                      id="outlined-adornment-weight"
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <SearchIcon />
+                        </InputAdornment>
+                      }
+                      aria-describedby="outlined-weight-helper-text"
+                      inputProps={{
+                        "aria-label": "weight",
+                      }}
+                    />
+                  </FormControl>
                 </Box>
               </Box>
 
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <FormControl
-                  sx={{ ml: 2, mr: 2, width: "100%" }}
-                  variant="outlined"
-                >
-                  <OutlinedInput
-                    value={searchInput}
-                    onChange={inputValueHandler}
-                    sx={{ background: "#e5e5e5", height: "30px" }}
-                    placeholder="Search"
-                    id="outlined-adornment-weight"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <SearchIcon />
-                      </InputAdornment>
-                    }
-                    aria-describedby="outlined-weight-helper-text"
-                    inputProps={{
-                      "aria-label": "weight",
-                    }}
-                  />
-                </FormControl>
-              </Box>
-
               <Box sx={{ display: "flex" }}>
-                <Box sx={{ display: { sm: "none", md: "none", lg: "flex" } }}>
+                {/* <Box sx={{ display: { sm: "none", md: "none", lg: "flex" } }}>
                   <Button
                     onClick={() => {
                       navigate("/working");
@@ -352,7 +354,7 @@ const NavBar = (props) => {
                   >
                     Upload
                   </Button>
-                </Box>
+                </Box> */}
                 <Box sx={{ display: "flex" }}>
                   <div style={{ height: "100%" }}>
                     <Button
@@ -384,7 +386,7 @@ const NavBar = (props) => {
                     </Menu>
                   </div>
 
-                  <Tooltip
+                  {/* <Tooltip
                     title="No notifications"
                     sx={{
                       width: 46,
@@ -408,9 +410,9 @@ const NavBar = (props) => {
                     <IconButton>
                       <EmailIcon sx={{ color: "#ccc" }} />
                     </IconButton>
-                  </Tooltip>
+                  </Tooltip> */}
                 </Box>
-                <Box
+                {/* <Box
                   sx={{
                     width: 46,
                     height: 46,
@@ -422,7 +424,7 @@ const NavBar = (props) => {
                   <MoreHorizIcon
                     sx={{ width: 35, height: 35, color: "#ccc" }}
                   />
-                </Box>
+                </Box> */}
               </Box>
             </Box>
             <Box

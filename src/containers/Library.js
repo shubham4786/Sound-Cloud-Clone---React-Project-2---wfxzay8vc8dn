@@ -118,7 +118,7 @@ const Library = () => {
               >
                 <Tab sx={tabStyle} label="Likes" {...tabIndex(0)} />
                 <Tab sx={tabStyle} label="History" {...tabIndex(1)} />
-                <Tab sx={tabStyle} label="Upload" {...tabIndex(2)} />
+                {/* <Tab sx={tabStyle} label="Upload" {...tabIndex(2)} /> */}
               </Tabs>
             </Box>
             <CustomTabPanel style={tabPanel} value={value} index={0}>

@@ -164,6 +164,7 @@ const SignUp = () => {
     transform: "translate(-50%, -50%)",
     width: { xs: "90%", sm: "70%", md: "45%", lg: "38%" },
     bgcolor: "background.paper",
+    borderRadius: "6px",
   };
 
   const boxStyle = {
@@ -275,7 +276,7 @@ const SignUp = () => {
                 style={{
                   fontWeight: 100,
                   color: "#b59797",
-                  fontSize: "33px",
+                  fontSize: "27px",
                 }}
               >
                 Connect on SoundCloud
@@ -399,7 +400,13 @@ const SignUp = () => {
 
           <Modal open={open} sx={{ bgcolor: "#f2f2f2e6" }}>
             <Box sx={style}>
-              <div style={{ display: "flex", justifyContent: "end" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  margin: "3px 3px 0 0",
+                }}
+              >
                 <CloseIcon onClick={handleClose} />
               </div>
               <h1 style={{ textAlign: "center", padding: "5px" }}>Sign In</h1>

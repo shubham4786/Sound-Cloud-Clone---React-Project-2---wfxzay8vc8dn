@@ -155,6 +155,7 @@ const ChildModal = () => {
     // maxWidth: "500px",
     bgcolor: "background.paper",
     width: { xs: "90%", sm: "70%", md: "45%", lg: "38%" },
+    borderRadius: "6px",
   };
 
   const modelBtnStyle = {
@@ -190,7 +191,13 @@ const ChildModal = () => {
       <Modal open={open}>
         <Box sx={style}>
           {/* <ToastContainer /> */}
-          <div style={{ display: "flex", justifyContent: "end" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              margin: "3px 3px 0 0",
+            }}
+          >
             <CloseIcon onClick={handleClose} />
           </div>
 
