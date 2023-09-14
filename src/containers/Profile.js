@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 const Profile = () => {
   const { searchedHideRef } = useContext(MyContext);
   const [user, setUser] = useState({});
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
@@ -201,7 +202,7 @@ const Profile = () => {
     <Container
       maxWidth="lg"
       ref={searchedHideRef}
-      sx={{ paddingTop: "45px", marginBottom: "50px" }}
+      sx={{ paddingTop: "60px", marginBottom: "50px", minHeight: "100vh" }}
     >
       <Box sx={{ margin: "0 24px" }}>
         <Box /*sx={{ background: "white" }}*/>
@@ -237,7 +238,7 @@ const Profile = () => {
                   <p className="accountpasswordError" ref={oldPasswordRef}>
                     Password didn't match.
                   </p>
-                  <p className="forgotPassword">Forgot password?</p>
+                  {/* <p className="forgotPassword">Forgot password?</p> */}
                 </div>
                 <div className="inputContainer">
                   <input
@@ -268,7 +269,7 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
-              <label className="checkboxLabel">
+              {/* <label className="checkboxLabel">
                 <input
                   type="checkbox"
                   className="inputCheckboxAccount"
@@ -276,13 +277,14 @@ const Profile = () => {
                   onChange={checkboxChangeHandler}
                 />
                 Sign out of all devices
-              </label>
+              </label> */}
               <div className="accountBtns">
                 <button onClick={saveInputHandler} className="saveAccountBtn">
                   Save
                 </button>
                 <button
-                  /*onClick={() => navigate(-1)}*/ className="cancelAccountBtn"
+                  onClick={() => navigate(-1)}
+                  className="cancelAccountBtn"
                 >
                   Cancel
                 </button>

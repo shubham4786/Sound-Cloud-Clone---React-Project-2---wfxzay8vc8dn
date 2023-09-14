@@ -6,7 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { MyContext } from "../MyContext";
 import { fetchMyList } from "../apiCall/GetLike";
-import SongListBox from "../components/SongListBox";
+import SongLikedBox from "../components/SongLikedBox";
 import workImgae from "../assets/working.png";
 
 const Library = () => {
@@ -124,7 +124,7 @@ const Library = () => {
             <CustomTabPanel style={tabPanel} value={value} index={0}>
               <Box>
                 {myList?.map((song, index) => (
-                  <SongListBox
+                  <SongLikedBox
                     key={index}
                     song={song}
                     index={index}

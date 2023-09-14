@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import { fetchFavorites } from "../apiCall/patchLike";
-// import { MyContext } from "../MyContext";
+import { MyContext } from "../MyContext";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 
-const SongListBox = ({ song, index, onClick }) => {
-  // const { isLike, setIsLike } = useContext(MyContext);
-  const [likes, setLikes] = useState(false);
+const SongLikedBox = ({ song, index, onClick }) => {
+  const { isLike, setIsLike } = useContext(MyContext);
+  const [likes, setLikes] = useState(true);
   const [likeColor, setLikeColor] = useState("#c1bdbd");
 
   const handleLikeBtn = (songId) => {
     fetchFavorites(songId);
+    setIsLike(!isLike);
     setLikes(!likes);
   };
 
@@ -22,7 +23,6 @@ const SongListBox = ({ song, index, onClick }) => {
   }, [likes]);
 
   const buttonStyle = () => ({
-    // padding: "10px",
     marginTop: "14px",
     border: `1px solid ${likeColor}`,
   });
@@ -67,4 +67,4 @@ const SongListBox = ({ song, index, onClick }) => {
   );
 };
 
-export default SongListBox;
+export default SongLikedBox;

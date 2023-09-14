@@ -6,6 +6,7 @@
     width: 100%;
     background-color: #f2f2f2;
     border-top: 1px solid #9d9da6;
+    display: none;
 }
 
 .sound_cloud-audio_player {

@@ -25,6 +25,7 @@ const AudioPlayer = ({ playlist }) => {
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(1);
   const clickRef = useRef();
+  const playerDisplay = useRef();
 
   const playPauseToggle = () => {
     if (isPlaying) {
@@ -128,8 +129,15 @@ const AudioPlayer = ({ playlist }) => {
     setPlayHistory(JSON.parse(localStorage.getItem("historySong")));
   }, [currentTrackIndex]);
 
+  // console.log(isPlaying);
+  if (!isPlaying) {
+    // playerDisplay.current.style.display = "none";
+  } else {
+    playerDisplay.current.style.display = "block";
+  }
+
   return (
-    <div className="sound_cloud-app_audio_player">
+    <div className="sound_cloud-app_audio_player" ref={playerDisplay}>
       <div className="sound_cloud-audio_player">
         <div className="sound_cloud-audio_player_left">
           <div className="sound_cloud-audio_player_icons">
