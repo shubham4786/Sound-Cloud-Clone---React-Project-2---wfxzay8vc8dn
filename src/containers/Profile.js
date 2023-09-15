@@ -202,7 +202,7 @@ const Profile = () => {
     <Container
       maxWidth="lg"
       ref={searchedHideRef}
-      sx={{ paddingTop: "60px", marginBottom: "50px", minHeight: "100vh" }}
+      sx={{ paddingTop: "60px", minHeight: "100vh" }}
     >
       <Box sx={{ margin: "0 24px" }}>
         <Box /*sx={{ background: "white" }}*/>

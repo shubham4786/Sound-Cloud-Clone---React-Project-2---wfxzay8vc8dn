@@ -44,7 +44,7 @@ const NavBar = (props) => {
   const searchContainerRef = useRef(null);
   const searchSongsRef = useRef([]);
 
-  const fetchSeachSongs = async () => {
+  const fetchSearchSongs = async () => {
     try {
       const response = await axios.get(
         "https://academics.newtonschool.co/api/v1/music/song",
@@ -70,9 +70,10 @@ const NavBar = (props) => {
 
   const inputValueHandler = (event) => {
     setSearchInput(event.target.value);
-    // console.log("search value:", event.target.value);
+    // console.log("search value:", searchInput);
+
     if (event.target.value) {
-      fetchSeachSongs();
+      fetchSearchSongs();
       searchContainerRef.current.style.display = "block";
       searchedHideRef.current.style.display = "none";
       //   // setSearching(false);
