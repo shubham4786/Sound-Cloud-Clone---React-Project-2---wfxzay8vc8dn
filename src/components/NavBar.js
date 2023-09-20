@@ -23,7 +23,7 @@ import Avatar from "@mui/material/Avatar";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 // import EmailIcon from "@mui/icons-material/Email";
 // import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import SongListBox from "./SongListBox";
 import { MyContext } from "../MyContext";
@@ -36,10 +36,11 @@ const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState({});
   const [searchInput, setSearchInput] = useState("");
   const [searchedSongs, setSearchedSongs] = useState([]);
-
+  const [activeButton, setActiveButton] = useState("");
   // const { setSearching } = useContext(SearchContext);
   const searchContainerRef = useRef(null);
   const searchSongsRef = useRef([]);
@@ -51,6 +52,9 @@ const NavBar = (props) => {
         {
           headers: {
             projectId: "wfxzay8vc8dn",
+          },
+          params: {
+            limit: 200,
           },
         }
       );
@@ -128,6 +132,27 @@ const NavBar = (props) => {
     localStorage.removeItem("userInfo");
     navigate("/");
   };
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    switch (currentPath) {
+      case "/home":
+        setActiveButton("home");
+        break;
+      case "/feed":
+        setActiveButton("feed");
+        break;
+      case "/library":
+        setActiveButton("library");
+        break;
+
+      default:
+        setActiveButton("");
+        break;
+    }
+  }, [location]);
+  // console.log(activeButton);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -268,6 +293,9 @@ const NavBar = (props) => {
 
                   <Box sx={{ display: "flex", width: 312 }}>
                     <Button
+                      className={` ${
+                        activeButton === "home" ? "activeListItem" : ""
+                      }`}
                       onClick={() => {
                         navigate("/home");
                       }}
@@ -276,6 +304,9 @@ const NavBar = (props) => {
                       Home
                     </Button>
                     <Button
+                      className={` ${
+                        activeButton === "feed" ? "activeListItem" : ""
+                      }`}
                       onClick={() => {
                         navigate("/feed");
                       }}
@@ -284,6 +315,9 @@ const NavBar = (props) => {
                       Feed
                     </Button>
                     <Button
+                      className={` ${
+                        activeButton === "library" ? "activeListItem" : ""
+                      }`}
                       onClick={() => {
                         navigate("/library");
                       }}

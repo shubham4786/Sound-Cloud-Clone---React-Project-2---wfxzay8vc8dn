@@ -97,16 +97,16 @@ const SignUp = () => {
         success: true,
       });
 
-      toast.success("Signin Successfull.", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast.success("Signin Successfull.", {
+      //   position: "top-right",
+      //   autoClose: 1500,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     } catch (error) {
       console.error("Login Error:", error);
       if (
@@ -146,7 +146,8 @@ const SignUp = () => {
     if (signinStatus.success) {
       setTimeout(() => {
         navigate("/home");
-      }, 2000);
+        // console.log(ToastContainer);
+      }, 5);
     }
   }, [signinStatus]);
 
