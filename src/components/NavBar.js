@@ -68,7 +68,7 @@ const NavBar = (props) => {
             projectId: "wfxzay8vc8dn",
           },
           params: {
-            limit: 50,
+            limit: 120,
           },
         }
       );
