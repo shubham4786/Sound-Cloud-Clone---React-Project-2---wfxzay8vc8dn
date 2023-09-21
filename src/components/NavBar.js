@@ -45,7 +45,7 @@ const NavBar = (props) => {
   const searchContainerRef = useRef(null);
   const searchSongsRef = useRef([]);
 
-  const fetchSearchSongs = async () => {
+  const handleSearch = async () => {
     try {
       const response = await axios.get(
         "https://academics.newtonschool.co/api/v1/music/song",
@@ -54,11 +54,88 @@ const NavBar = (props) => {
             projectId: "wfxzay8vc8dn",
           },
           params: {
-            limit: 200,
+            limit: 50,
           },
         }
       );
       searchSongsRef.current = response.data.data;
+      // console.log("response.data.data", response.data.data);
+
+      const response2 = await axios.get(
+        "https://academics.newtonschool.co/api/v1/music/album",
+        {
+          headers: {
+            projectId: "wfxzay8vc8dn",
+          },
+          params: {
+            limit: 50,
+          },
+        }
+      );
+
+      const albumData = response2.data.data.filter((item) => {
+        // console.log(item.songs.length);
+        const songs = item.songs;
+        return songs.length > 1;
+      });
+      // console.log(albumData);
+
+      albumData.map((song) => {
+        const data = song.songs;
+        // console.log("data", data);
+
+        data.map((item) => {
+          // console.log(item);
+          searchSongsRef.current.push(item);
+          // songArray.push(item);
+        });
+      });
+    } catch (error) {
+      console.error("Error fetching data from search:", error);
+    }
+  };
+
+  const fetchSearchSongs = async () => {
+    try {
+      // const response = await axios.get(
+      //   "https://academics.newtonschool.co/api/v1/music/song",
+      //   {
+      //     headers: {
+      //       projectId: "wfxzay8vc8dn",
+      //     },
+      //     params: {
+      //       limit: 200,
+      //     },
+      //   }
+      // );
+      // searchSongsRef.current = response.data.data;
+      // const response = await axios.get(
+      //   "https://academics.newtonschool.co/api/v1/music/album",
+      //   {
+      //     headers: {
+      //       projectId: "wfxzay8vc8dn",
+      //     },
+      //     params: {
+      //       limit: 120,
+      //     },
+      //   }
+      // );
+      // const albumData = response.data.data.filter((item) => {
+      //   // console.log(item.songs.length);
+      //   const songs = item.songs;
+      //   return songs.length > 1;
+      // });
+      // // console.log(albumData);
+      // const songData = albumData.map((song) => {
+      //   const data = song.songs;
+      //   console.log(data);
+
+      //   data.map((item) => {
+      //     // console.log(item);
+      //     searchSongsRef.current = item;
+      //   });
+      // });
+
       // console.log("setting", searchSongsRef.current);
       // console.log("searchSongs", searchSongsRef.current);
       const searchResult = searchSongsRef.current.filter((song) =>
@@ -84,7 +161,7 @@ const NavBar = (props) => {
     } else {
       searchContainerRef.current.style.display = "none";
       searchedHideRef.current.style.display = "block";
-      searchSongsRef.current = [];
+      // searchSongsRef.current = [];
       //   // setSearching(true);
     }
   };
@@ -343,6 +420,7 @@ const NavBar = (props) => {
                     <OutlinedInput
                       value={searchInput}
                       onChange={inputValueHandler}
+                      onClick={handleSearch}
                       sx={{ background: "#e5e5e5", height: "30px" }}
                       placeholder="Search"
                       id="outlined-adornment-weight"
@@ -477,6 +555,7 @@ const NavBar = (props) => {
                 <OutlinedInput
                   value={searchInput}
                   onChange={inputValueHandler}
+                  onClick={handleSearch}
                   sx={{ background: "#e5e5e5", height: "30px" }}
                   placeholder="Search"
                   id="outlined-adornment-weight"
