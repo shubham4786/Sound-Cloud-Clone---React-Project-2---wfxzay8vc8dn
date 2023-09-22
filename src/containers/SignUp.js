@@ -91,22 +91,22 @@ const SignUp = () => {
 
       //Used to persist userinfo
       localStorage.setItem("userInfo", JSON.stringify(userDetails));
-      localStorage.removeItem("historySong");
+      // localStorage.removeItem("historySong");
 
       setSigninStatus({
         success: true,
       });
 
-      // toast.success("Signin Successfull.", {
-      //   position: "top-right",
-      //   autoClose: 1500,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
+      toast.success("Signin Successfull.", {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.error("Login Error:", error);
       if (
@@ -147,7 +147,7 @@ const SignUp = () => {
       setTimeout(() => {
         navigate("/home");
         // console.log(ToastContainer);
-      }, 5);
+      }, 500);
     }
   }, [signinStatus]);
 
@@ -239,7 +239,7 @@ const SignUp = () => {
                 <img style={{ width: "150px" }} src={logo} alt="" />
               </Box>
               <Stack
-                sx={{ display: "flex", flexWrap: "wrap" }}
+                sx={{ display: { xs: "none", sm: "flex" }, flexWrap: "wrap" }}
                 spacing={2}
                 direction="row"
               >

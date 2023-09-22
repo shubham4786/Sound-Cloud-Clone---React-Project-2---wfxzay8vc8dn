@@ -11,10 +11,16 @@ const SongListBox = ({ song, index, onClick }) => {
   // const { isLike, setIsLike } = useContext(MyContext);
   const [likes, setLikes] = useState(false);
   const [likeColor, setLikeColor] = useState("#c1bdbd");
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleLikeBtn = (songId) => {
     fetchFavorites(songId);
     setLikes(!likes);
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -28,6 +34,27 @@ const SongListBox = ({ song, index, onClick }) => {
   });
   return (
     <Box key={index}>
+      {showAlert && (
+        <div className="alert">
+          {likes ? (
+            <h4
+              style={{ background: "#f50", padding: "8px", color: "#e9e7e4" }}
+            >
+              You liked song {song.title}!
+            </h4>
+          ) : (
+            <h4
+              style={{
+                background: "#c1bdbd",
+                padding: "8px",
+                color: "#342f24",
+              }}
+            >
+              You unliked song {song.title}!
+            </h4>
+          )}
+        </div>
+      )}
       <ListItem>
         <Box sx={{ display: "flex", paddingLeft: "20px", flexWrap: "wrap" }}>
           <Box

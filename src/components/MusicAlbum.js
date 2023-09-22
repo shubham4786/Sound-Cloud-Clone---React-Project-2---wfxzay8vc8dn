@@ -1,15 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext";
 
 const MusicAlbum = (props) => {
   // console.log(props.item);
-  const { setIsPlaying, setSongList, setCurrentTrackIndex } =
-    useContext(MyContext);
+  const {
+    setIsPlaying,
+    setSongList,
+    setCurrentTrackIndex,
+    playerDisplay,
+    setAutoPlay,
+  } = useContext(MyContext);
   const navigate = useNavigate();
 
   const albumData = (props) => {
+    // console.log(props.item.songs.length - 1);
     localStorage.setItem(
       "albumData",
       JSON.stringify({
@@ -18,8 +24,10 @@ const MusicAlbum = (props) => {
     );
     setSongList(JSON.parse(localStorage.getItem("albumData")));
     navigate("/playlist");
-    setIsPlaying(true);
-    setCurrentTrackIndex(0);
+    setIsPlaying(false);
+    setCurrentTrackIndex(props.item.songs.length - 1);
+    setAutoPlay(false);
+    playerDisplay.current.style.display = "block";
   };
   return (
     <Button

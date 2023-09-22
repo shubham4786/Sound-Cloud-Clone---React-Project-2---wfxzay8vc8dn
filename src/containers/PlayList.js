@@ -16,6 +16,7 @@ const PlayList = () => {
     songList,
     setSongList,
     searchedHideRef,
+    setAutoPlay,
   } = useContext(MyContext);
   const albumData = songList.data;
   const songs = albumData.songs;
@@ -23,8 +24,9 @@ const PlayList = () => {
   // console.log(albumData);
 
   const handleSong = (index) => {
-    setCurrentTrackIndex(index);
+    setAutoPlay(true);
     setIsPlaying(true);
+    setCurrentTrackIndex(index);
   };
 
   useEffect(() => {

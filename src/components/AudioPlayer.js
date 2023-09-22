@@ -17,6 +17,9 @@ const AudioPlayer = ({ playlist }) => {
     setIsPlaying,
     audioRef,
     setPlayHistory,
+    playerDisplay,
+    autoPlay,
+    // setAutoPlay,
   } = useContext(MyContext);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -25,7 +28,6 @@ const AudioPlayer = ({ playlist }) => {
   const [played, setPlayed] = useState(0);
   const [volume, setVolume] = useState(1);
   const clickRef = useRef();
-  const playerDisplay = useRef();
 
   const playPauseToggle = () => {
     if (isPlaying) {
@@ -166,7 +168,7 @@ const AudioPlayer = ({ playlist }) => {
             preload="auto"
             // loop={true}
             volume={volume}
-            autoPlay={true}
+            autoPlay={autoPlay}
             // controls={true}
             onLoadedData={hanldeDataLoad}
           />

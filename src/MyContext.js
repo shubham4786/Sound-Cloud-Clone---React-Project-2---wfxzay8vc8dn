@@ -13,6 +13,8 @@ const MyProvider = ({ children }) => {
   const [feedSong, setFeedSong] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const searchedHideRef = useRef(null);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const playerDisplay = useRef();
 
   return (
     <MyContext.Provider
@@ -31,6 +33,9 @@ const MyProvider = ({ children }) => {
         isLike,
         setIsLike,
         searchedHideRef,
+        playerDisplay,
+        autoPlay,
+        setAutoPlay,
       }}
     >
       {children}

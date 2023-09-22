@@ -309,7 +309,7 @@ const NavBar = (props) => {
                   fontWeight: "600",
                 }}
               >
-                Logout
+                Signout
               </Button>
             </Box>
             {/* <Box>
@@ -495,7 +495,7 @@ const NavBar = (props) => {
                     >
                       <MenuItem onClick={handleProfile}>Profile</MenuItem>
                       {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                      <MenuItem onClick={handleSignOut}>Logout</MenuItem>
+                      <MenuItem onClick={handleSignOut}>Signout</MenuItem>
                     </Menu>
                   </div>
 
