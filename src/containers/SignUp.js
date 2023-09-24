@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,8 +14,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { fetchfilterSongs } from "../apiCall/GetSongs";
+import { MyContext } from "../MyContext";
 
 const SignUp = () => {
+  const { setIsSingnIn, isSingOut, setIsSingnOut } = useContext(MyContext);
   const [songSignUp, setSongSignUp] = useState([]);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -97,16 +99,18 @@ const SignUp = () => {
         success: true,
       });
 
-      toast.success("Signin Successfull.", {
-        position: "top-right",
-        autoClose: 500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      setIsSingnIn(true);
+
+      // toast.success("Signin Successfull.", {
+      //   position: "top-right",
+      //   autoClose: 500,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     } catch (error) {
       console.error("Login Error:", error);
       if (
@@ -147,7 +151,7 @@ const SignUp = () => {
       setTimeout(() => {
         navigate("/home");
         // console.log(ToastContainer);
-      }, 500);
+      }, 5);
     }
   }, [signinStatus]);
 
@@ -214,6 +218,9 @@ const SignUp = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsSingnOut(false);
+    }, 1000);
     const fetchData = async () => {
       const songData = await fetchfilterSongs(3, 10);
       setSongSignUp(songData);
@@ -224,6 +231,20 @@ const SignUp = () => {
 
   return (
     <>
+      {isSingOut && (
+        <div className="alert">
+          <h4
+            style={{
+              background: "#1fdd1e",
+              padding: "8px",
+              color: "#342f24",
+              textAlign: "center",
+            }}
+          >
+            Signout Successfull !
+          </h4>
+        </div>
+      )}
       <Container maxWidth="lg">
         <ThemeProvider theme={theme}>
           <Box sx={boxStyle}>

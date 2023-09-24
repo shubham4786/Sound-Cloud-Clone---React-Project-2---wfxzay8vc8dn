@@ -15,6 +15,8 @@ const MyProvider = ({ children }) => {
   const searchedHideRef = useRef(null);
   const [autoPlay, setAutoPlay] = useState(true);
   const playerDisplay = useRef();
+  const [isSingIn, setIsSingnIn] = useState(false);
+  const [isSingOut, setIsSingnOut] = useState(false);
 
   return (
     <MyContext.Provider
@@ -36,6 +38,10 @@ const MyProvider = ({ children }) => {
         playerDisplay,
         autoPlay,
         setAutoPlay,
+        isSingIn,
+        setIsSingnIn,
+        isSingOut,
+        setIsSingnOut,
       }}
     >
       {children}

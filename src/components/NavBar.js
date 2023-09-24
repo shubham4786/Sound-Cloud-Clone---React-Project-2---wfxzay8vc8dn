@@ -31,8 +31,13 @@ import { MyContext } from "../MyContext";
 const drawerWidth = 240;
 
 const NavBar = (props) => {
-  const { setCurrentTrackIndex, setIsPlaying, setSongList, searchedHideRef } =
-    useContext(MyContext);
+  const {
+    setCurrentTrackIndex,
+    setIsPlaying,
+    setSongList,
+    searchedHideRef,
+    setIsSingnOut,
+  } = useContext(MyContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
@@ -208,6 +213,7 @@ const NavBar = (props) => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userInfo");
     navigate("/");
+    setIsSingnOut(true);
   };
 
   useEffect(() => {
