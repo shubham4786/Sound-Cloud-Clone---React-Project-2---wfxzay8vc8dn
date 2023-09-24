@@ -20,7 +20,7 @@ const SongListBox = ({ song, index, onClick }) => {
 
     setTimeout(() => {
       setShowAlert(false);
-    }, 2000);
+    }, 1000);
   };
 
   useEffect(() => {
